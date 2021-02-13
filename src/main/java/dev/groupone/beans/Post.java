@@ -25,40 +25,37 @@ public class Post {
 	@GeneratedValue(generator = "POST_SEQ", strategy = GenerationType.SEQUENCE)
 	private int id;
 	
-	private int likes;
 	private String caption;
-	private int image;
+	private int picture;
 	
 	@ManyToOne
 	@JoinColumn(name = "author")
 	private int author;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "PetPost", joinColumns = @JoinColumn(name = "postid"), inverseJoinColumns = @JoinColumn(name = "petid"))
+	@JoinTable(name = "pets_tagged_in_posts", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "pet_id"))
 	private List<Pet> pets;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "Likes", joinColumns = @JoinColumn(name = "userid"), inverseJoinColumns = @JoinColumn(name = "postid"))
-	private List<User> users;
+	@JoinTable(name = "post_likes", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> likes;
 	
 	public Post() {
 		super();
 	}
 
-	public Post(int id, int likes, String caption, int image, int author) {
+	public Post(int id, String caption, int picture, int author) {
 		super();
 		this.id = id;
-		this.likes = likes;
 		this.caption = caption;
-		this.image = image;
+		this.picture = picture;
 		this.author = author;
 	}
 
-	public Post(int likes, String caption, int image, int author) {
+	public Post(String caption, int picture, int author) {
 		super();
-		this.likes = likes;
 		this.caption = caption;
-		this.image = image;
+		this.picture = picture;
 		this.author = author;
 	}
 
@@ -70,14 +67,6 @@ public class Post {
 		this.id = id;
 	}
 
-	public int getLikes() {
-		return likes;
-	}
-
-	public void setLikes(int likes) {
-		this.likes = likes;
-	}
-
 	public String getCaption() {
 		return caption;
 	}
@@ -86,12 +75,12 @@ public class Post {
 		this.caption = caption;
 	}
 
-	public int getImage() {
-		return image;
+	public int getpicture() {
+		return picture;
 	}
 
-	public void setImage(int image) {
-		this.image = image;
+	public void setpicture(int picture) {
+		this.picture = picture;
 	}
 
 	public int getAuthor() {
@@ -104,7 +93,7 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", likes=" + likes + ", caption=" + caption + ", image=" + image + ", author="
+		return "Post [id=" + id + ", caption=" + caption + ", picture=" + picture + ", author="
 				+ author + "]";
 	}
 

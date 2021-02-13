@@ -31,34 +31,34 @@ public class Pet {
 	private int pet_profile_picture;
 	
 	@ManyToOne
-	@JoinColumn(name = "OWNER")
-	private User owner;
+	@JoinColumn(name = "pet_owner")
+	private User pet_owner;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "Follower", joinColumns = @JoinColumn(name = "pet"), inverseJoinColumns = @JoinColumn(name = "userid"))
+	@JoinTable(name = "pet_followers", joinColumns = @JoinColumn(name = "pet_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> followers;
 	
 	public Pet() {
 		super();
 	}
 
-	public Pet(int id, String pet_name, String pet_tag, String bio, int pet_profile_picture, User owner) {
+	public Pet(int id, String pet_name, String pet_tag, String bio, int pet_profile_picture, User pet_owner) {
 		super();
 		this.id = id;
 		this.pet_name = pet_name;
 		this.pet_tag = pet_tag;
 		this.bio = bio;
 		this.pet_profile_picture = pet_profile_picture;
-		this.owner = owner;
+		this.pet_owner = pet_owner;
 	}
 
-	public Pet(String pet_name, String pet_tag, String bio, int pet_profile_picture, User owner) {
+	public Pet(String pet_name, String pet_tag, String bio, int pet_profile_picture, User pet_owner) {
 		super();
 		this.pet_name = pet_name;
 		this.pet_tag = pet_tag;
 		this.bio = bio;
 		this.pet_profile_picture = pet_profile_picture;
-		this.owner = owner;
+		this.pet_owner = pet_owner;
 	}
 
 	public int getId() {
@@ -101,18 +101,18 @@ public class Pet {
 		this.pet_profile_picture = pet_profile_picture;
 	}
 
-	public User getOwner() {
-		return owner;
+	public User getpet_owner() {
+		return pet_owner;
 	}
 
-	public void setOwner(User owner) {
-		this.owner = owner;
+	public void setpet_owner(User pet_owner) {
+		this.pet_owner = pet_owner;
 	}
 
 	@Override
 	public String toString() {
 		return "Pet [id=" + id + ", pet_name=" + pet_name + ", pet_tag=" + pet_tag + ", bio=" + bio
-				+ ", pet_profile_picture=" + pet_profile_picture + ", owner=" + owner + "]";
+				+ ", pet_profile_picture=" + pet_profile_picture + ", pet_owner=" + pet_owner + "]";
 	}
 	
 }
