@@ -1,0 +1,65 @@
+body {
+    margin: 0%;
+    height: 100vh;
+    width: 100vw;
+}
+
+.pane-logo {
+    background-color: #FFB27F;
+
+    float: left;
+    width: 75%;
+    height: 100%;
+}
+
+.image-logo {
+    display: block;
+    width: 40%;
+    height: auto;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+}
+
+.pane-login{
+    float:left;
+    width: 25%;
+    height:100%;
+
+    position: absolute;
+    right:0;
+    top:0;
+}
+
+.login-bar {
+    margin-top: 5%;
+    margin-left: 5%;
+
+    width: 90%;
+    height: 5%;
+    background-color: white;
+    border-width: 10%;
+
+    font-size: xx-large;
+}
+
+.login-bar:focus, .login-bar:active {
+    border-color: #FFB27F;
+    border-width: 10%;
+}
+
+.round-button {
+    color: white;
+    border-radius: 20px;
+    border-color: transparent;
+    background-color: #FFB27F;
+
+    width:90%;
+
+    
+    margin-top: 5%;
+    margin-left: 5%;
+
+    font-size: xx-large;
+}
