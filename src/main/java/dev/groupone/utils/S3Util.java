@@ -1,4 +1,4 @@
-package dev.mayers.utils;
+package dev.groupone.utils;
 
 import java.io.File;
 

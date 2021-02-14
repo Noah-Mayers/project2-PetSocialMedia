@@ -4,8 +4,7 @@ import java.io.File;
 
 import org.junit.jupiter.api.Test;
 
-
-import dev.mayers.utils.S3Util;
+import dev.groupone.utils.S3Util;
 
 
 class S3Tests {
