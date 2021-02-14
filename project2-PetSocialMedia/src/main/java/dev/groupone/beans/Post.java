@@ -33,7 +33,7 @@ public class Post {
 	
 	@ManyToOne
 	@JoinColumn(name = "author")
-	private int author;
+	private User author;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "pets_tagged_in_posts", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "pet_id"))
@@ -47,7 +47,7 @@ public class Post {
 		super();
 	}
 
-	public Post(int id, String caption, Image picture, int author) {
+	public Post(int id, String caption, Image picture, User author) {
 		super();
 		this.id = id;
 		this.caption = caption;
@@ -55,7 +55,7 @@ public class Post {
 		this.author = author;
 	}
 
-	public Post(String caption, Image picture, int author) {
+	public Post(String caption, Image picture, User author) {
 		super();
 		this.caption = caption;
 		this.picture = picture;
@@ -86,11 +86,11 @@ public class Post {
 		this.picture = picture;
 	}
 
-	public int getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(int author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 
