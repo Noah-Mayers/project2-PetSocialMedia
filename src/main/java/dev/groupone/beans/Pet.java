@@ -28,7 +28,10 @@ public class Pet {
 	private String pet_name;
 	private String pet_tag;
 	private String bio;
-	private int pet_profile_picture;
+	
+	@ManyToOne
+	@JoinColumn(name = "pet_profile_picture")
+	private Image pet_profile_picture;
 	
 	@ManyToOne
 	@JoinColumn(name = "pet_owner")
@@ -42,7 +45,7 @@ public class Pet {
 		super();
 	}
 
-	public Pet(int id, String pet_name, String pet_tag, String bio, int pet_profile_picture, User pet_owner) {
+	public Pet(int id, String pet_name, String pet_tag, String bio, Image pet_profile_picture, User pet_owner) {
 		super();
 		this.id = id;
 		this.pet_name = pet_name;
@@ -52,7 +55,7 @@ public class Pet {
 		this.pet_owner = pet_owner;
 	}
 
-	public Pet(String pet_name, String pet_tag, String bio, int pet_profile_picture, User pet_owner) {
+	public Pet(String pet_name, String pet_tag, String bio, Image pet_profile_picture, User pet_owner) {
 		super();
 		this.pet_name = pet_name;
 		this.pet_tag = pet_tag;
@@ -93,11 +96,11 @@ public class Pet {
 		this.bio = bio;
 	}
 
-	public int getPet_profile_picture() {
+	public Image getPet_profile_picture() {
 		return pet_profile_picture;
 	}
 
-	public void setPet_profile_picture(int pet_profile_picture) {
+	public void setPet_profile_picture(Image pet_profile_picture) {
 		this.pet_profile_picture = pet_profile_picture;
 	}
 

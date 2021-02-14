@@ -26,7 +26,10 @@ public class Post {
 	private int id;
 	
 	private String caption;
-	private int picture;
+	
+	@ManyToOne
+	@JoinColumn(name = "picture")
+	private Image picture;
 	
 	@ManyToOne
 	@JoinColumn(name = "author")
@@ -44,7 +47,7 @@ public class Post {
 		super();
 	}
 
-	public Post(int id, String caption, int picture, int author) {
+	public Post(int id, String caption, Image picture, int author) {
 		super();
 		this.id = id;
 		this.caption = caption;
@@ -52,7 +55,7 @@ public class Post {
 		this.author = author;
 	}
 
-	public Post(String caption, int picture, int author) {
+	public Post(String caption, Image picture, int author) {
 		super();
 		this.caption = caption;
 		this.picture = picture;
@@ -75,11 +78,11 @@ public class Post {
 		this.caption = caption;
 	}
 
-	public int getpicture() {
+	public Image getpicture() {
 		return picture;
 	}
 
-	public void setpicture(int picture) {
+	public void setpicture(Image picture) {
 		this.picture = picture;
 	}
 

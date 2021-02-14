@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,13 +24,16 @@ public class User {
 	private String username;
 	private String account_password;
 	private String bio;
-	private int profile_picture;
+	
+	@ManyToOne
+	@JoinColumn(name = "profile_picture")
+	private Image profile_picture;
 	
 	public User() {
 		super();
 	}
 
-	public User(int id, String email, String username, String account_password, String bio, int profile_picture) {
+	public User(int id, String email, String username, String account_password, String bio, Image profile_picture) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -38,7 +43,7 @@ public class User {
 		this.profile_picture = profile_picture;
 	}
 
-	public User(String email, String username, String account_password, String bio, int profile_picture) {
+	public User(String email, String username, String account_password, String bio, Image profile_picture) {
 		super();
 		this.email = email;
 		this.username = username;
@@ -87,11 +92,11 @@ public class User {
 		this.bio = bio;
 	}
 
-	public int getProfile_picture() {
+	public Image getProfile_picture() {
 		return profile_picture;
 	}
 
-	public void setProfile_picture(int profile_picture) {
+	public void setProfile_picture(Image profile_picture) {
 		this.profile_picture = profile_picture;
 	}
 
