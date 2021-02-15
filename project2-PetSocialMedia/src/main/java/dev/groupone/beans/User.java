@@ -13,22 +13,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 public class User {
-	
+
 	@Id
 	@Column(updatable = false)
 	@SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQ", allocationSize = 1)
 	@GeneratedValue(generator = "USER_SEQ", strategy = GenerationType.SEQUENCE)
 	private int id;
-	
+
 	private String email;
 	private String username;
 	private String account_password;
 	private String bio;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "profile_picture")
 	private Image profile_picture;
-	
+
 	public User() {
 		super();
 	}
@@ -50,6 +50,13 @@ public class User {
 		this.account_password = account_password;
 		this.bio = bio;
 		this.profile_picture = profile_picture;
+	}
+
+	public User(String email, String username, String account_password) {
+		super();
+		this.email = email;
+		this.username = username;
+		this.account_password = account_password;
 	}
 
 	public int getId() {

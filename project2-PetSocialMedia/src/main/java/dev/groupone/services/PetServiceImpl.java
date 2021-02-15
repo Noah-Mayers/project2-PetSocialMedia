@@ -1,0 +1,41 @@
+package dev.groupone.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import dev.groupone.beans.Pet;
+import dev.groupone.repositories.PetRepo;
+
+@Service
+public class PetServiceImpl implements PetService {
+	@Autowired
+	PetRepo pr;
+	@Override
+	public Pet addPet(Pet pet) {
+		return pr.save(pet);
+	}
+
+	@Override
+	public Pet getPet(int id) {
+		return pr.findById(id).get();
+	}
+
+	@Override
+	public List<Pet> getAllPets() {
+		return (List<Pet>) pr.findAll();
+	}
+
+	@Override
+	public boolean deletePet(int id) {
+		try {
+			pr.delete(pr.findById(id).get());
+			return true;
+		} catch(IllegalArgumentException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+}
