@@ -25,43 +25,51 @@ public class Pet {
 	@GeneratedValue(generator = "PET_SEQ", strategy = GenerationType.SEQUENCE)
 	private int id;
 	
-	private String pet_name;
-	private String pet_tag;
+	@Column(nullable = false, name = "pet_name")
+	private String name;
+	
+	@Column(nullable = false, name = "pet_tag", unique = true)
+	private String tag;
+	
+	@Column(nullable = true, name = "bio")
 	private String bio;
 	
 	@ManyToOne
 	@JoinColumn(name = "pet_profile_picture")
-	private Image pet_profile_picture;
+	private Image profilePicture;
 	
 	@ManyToOne
-	@JoinColumn(name = "pet_owner")
+	@JoinColumn(name = "pet_owner", nullable = false)
 	private User pet_owner;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "pet_followers", joinColumns = @JoinColumn(name = "pet_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> followers;
-	
-	public Pet() {
-		super();
-	}
 
-	public Pet(int id, String pet_name, String pet_tag, String bio, Image pet_profile_picture, User pet_owner) {
+	public Pet(int id, String name, String tag, String bio, Image profilePicture, User pet_owner,
+			List<User> followers) {
 		super();
 		this.id = id;
-		this.pet_name = pet_name;
-		this.pet_tag = pet_tag;
+		this.name = name;
+		this.tag = tag;
 		this.bio = bio;
-		this.pet_profile_picture = pet_profile_picture;
+		this.profilePicture = profilePicture;
 		this.pet_owner = pet_owner;
+		this.followers = followers;
 	}
 
-	public Pet(String pet_name, String pet_tag, String bio, Image pet_profile_picture, User pet_owner) {
+	public Pet(String name, String tag, String bio, Image profilePicture, User pet_owner, List<User> followers) {
 		super();
-		this.pet_name = pet_name;
-		this.pet_tag = pet_tag;
+		this.name = name;
+		this.tag = tag;
 		this.bio = bio;
-		this.pet_profile_picture = pet_profile_picture;
+		this.profilePicture = profilePicture;
 		this.pet_owner = pet_owner;
+		this.followers = followers;
+	}
+
+	public Pet() {
+		super();
 	}
 
 	public int getId() {
@@ -72,20 +80,20 @@ public class Pet {
 		this.id = id;
 	}
 
-	public String getPet_name() {
-		return pet_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setPet_name(String pet_name) {
-		this.pet_name = pet_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getPet_tag() {
-		return pet_tag;
+	public String getTag() {
+		return tag;
 	}
 
-	public void setPet_tag(String pet_tag) {
-		this.pet_tag = pet_tag;
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 	public String getBio() {
@@ -96,26 +104,38 @@ public class Pet {
 		this.bio = bio;
 	}
 
-	public Image getPet_profile_picture() {
-		return pet_profile_picture;
+	public Image getProfilePicture() {
+		return profilePicture;
 	}
 
-	public void setPet_profile_picture(Image pet_profile_picture) {
-		this.pet_profile_picture = pet_profile_picture;
+	public void setProfilePicture(Image profilePicture) {
+		this.profilePicture = profilePicture;
 	}
 
-	public User getpet_owner() {
+	public User getPet_owner() {
 		return pet_owner;
 	}
 
-	public void setpet_owner(User pet_owner) {
+	public void setPet_owner(User pet_owner) {
 		this.pet_owner = pet_owner;
+	}
+
+	public List<User> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(List<User> followers) {
+		this.followers = followers;
 	}
 
 	@Override
 	public String toString() {
-		return "Pet [id=" + id + ", pet_name=" + pet_name + ", pet_tag=" + pet_tag + ", bio=" + bio
-				+ ", pet_profile_picture=" + pet_profile_picture + ", pet_owner=" + pet_owner + "]";
+		return "Pet [id=" + id + ", name=" + name + ", tag=" + tag + ", bio=" + bio + ", profilePicture="
+				+ profilePicture + ", pet_owner=" + pet_owner + ", followers=" + followers + "]";
 	}
+	
+	
+	
+	
 	
 }

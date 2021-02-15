@@ -20,14 +20,21 @@ public class User {
 	@GeneratedValue(generator = "USER_SEQ", strategy = GenerationType.SEQUENCE)
 	private int id;
 
+	@Column(nullable = false, name = "email", unique = true)
 	private String email;
+	
+	@Column(nullable = false, name = "username", unique = true)
 	private String username;
-	private String account_password;
+	
+	@Column(nullable = false, name = "account_password", unique = false)
+	private String password;
+	
+	
 	private String bio;
 
 	@ManyToOne
 	@JoinColumn(name = "profile_picture")
-	private Image profile_picture;
+	private Image profilePicture;
 
 	public User() {
 		super();
@@ -38,25 +45,25 @@ public class User {
 		this.id = id;
 		this.email = email;
 		this.username = username;
-		this.account_password = account_password;
+		this.password = account_password;
 		this.bio = bio;
-		this.profile_picture = profile_picture;
+		this.profilePicture = profile_picture;
 	}
 
 	public User(String email, String username, String account_password, String bio, Image profile_picture) {
 		super();
 		this.email = email;
 		this.username = username;
-		this.account_password = account_password;
+		this.password = account_password;
 		this.bio = bio;
-		this.profile_picture = profile_picture;
+		this.profilePicture = profile_picture;
 	}
 
 	public User(String email, String username, String account_password) {
 		super();
 		this.email = email;
 		this.username = username;
-		this.account_password = account_password;
+		this.password = account_password;
 	}
 
 	public int getId() {
@@ -84,11 +91,11 @@ public class User {
 	}
 
 	public String getAccount_password() {
-		return account_password;
+		return password;
 	}
 
 	public void setAccount_password(String account_password) {
-		this.account_password = account_password;
+		this.password = account_password;
 	}
 
 	public String getBio() {
@@ -100,17 +107,17 @@ public class User {
 	}
 
 	public Image getProfile_picture() {
-		return profile_picture;
+		return profilePicture;
 	}
 
 	public void setProfile_picture(Image profile_picture) {
-		this.profile_picture = profile_picture;
+		this.profilePicture = profile_picture;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", username=" + username + ", account_password="
-				+ account_password + ", bio=" + bio + ", profile_picture=" + profile_picture + "]";
+				+ password + ", bio=" + bio + ", profile_picture=" + profilePicture + "]";
 	}
 
 }

@@ -18,42 +18,55 @@ public class Image {
 	@GeneratedValue(generator = "IMAGE_SEQ", strategy = GenerationType.SEQUENCE)
 	private int id;
 	
-	private String image_url;
+	
+	@Column(nullable = false, name = "image_url", unique = true)
+	private String url;
+
+
+	public Image(int id, String url) {
+		super();
+		this.id = id;
+		this.url = url;
+	}
+
+
+	public Image(String url) {
+		super();
+		this.url = url;
+	}
+
 
 	public Image() {
 		super();
 	}
 
-	public Image(int id, String image_url) {
-		super();
-		this.id = id;
-		this.image_url = image_url;
-	}
-
-	public Image(String image_url) {
-		super();
-		this.image_url = image_url;
-	}
 
 	public int getId() {
 		return id;
 	}
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getImage_url() {
-		return image_url;
+
+	public String getUrl() {
+		return url;
 	}
 
-	public void setImage_url(String image_url) {
-		this.image_url = image_url;
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
+
 
 	@Override
 	public String toString() {
-		return "Image [id=" + id + ", image_url=" + image_url + "]";
+		return "Image [id=" + id + ", url=" + url + "]";
 	}
+
+	
+	
 	
 }

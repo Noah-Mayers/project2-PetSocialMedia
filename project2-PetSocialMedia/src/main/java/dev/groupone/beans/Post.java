@@ -25,6 +25,7 @@ public class Post {
 	@GeneratedValue(generator = "POST_SEQ", strategy = GenerationType.SEQUENCE)
 	private int id;
 	
+
 	private String caption;
 	
 	@ManyToOne
@@ -32,10 +33,10 @@ public class Post {
 	private Image picture;
 	
 	@ManyToOne
-	@JoinColumn(name = "author")
+	@JoinColumn(name = "author", nullable = false)
 	private User author;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch =  FetchType.EAGER)
 	@JoinTable(name = "pets_tagged_in_posts", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "pet_id"))
 	private List<Pet> pets;
 	
