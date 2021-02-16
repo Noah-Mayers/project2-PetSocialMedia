@@ -29,6 +29,11 @@ public class PetController {
 		return null;
 	}
 	
+	/**
+	 * creates a pet with the values given in the body 
+	 * @param newPet
+	 * @return
+	 */
 	@PostMapping(value = "/pets", consumes = "application/json", produces = "application/json")
 	public Pet createUser(@RequestBody Pet newPet) {
 		//creates the user with the given parameters 
@@ -39,13 +44,23 @@ public class PetController {
 	
 	
 	
-	
+	/**
+	 * returns a pet object with the given id in the path. 
+	 * @param id
+	 * @return
+	 */
 	@GetMapping(value = "/pets/{id}", produces = "application/json")
 	public Pet getPet(@PathVariable("id") String id) {
 		//gets the user with the given id
 		return null;
 	}
 	
+	/**
+	 * updates the pet wit the given id in the path with the pet object in the body of the request
+	 * @param id
+	 * @param updatedPet
+	 * @return
+	 */
 	@PutMapping(value = "/pets/{id}", consumes = "application/json", produces = "application/json")
 	public Pet updatePet( @PathVariable("id") int id, @RequestBody Pet updatedPet) {
 		
@@ -53,6 +68,12 @@ public class PetController {
 		return null;
 	}
 	
+	
+	/**
+	 * deletes the pet with the given id in the path variable
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping(value = "/pets/{id}")
 	public boolean deletePet(@PathVariable("id") int id) {
 		System.out.println("Executing Delete");
@@ -60,7 +81,14 @@ public class PetController {
 		return false;
 	}
 	
-	
+	/**
+	 * searches the db for pets with the matching parameters
+	 * @param name
+	 * @param tag
+	 * @param ownerName
+	 * @param ownerId
+	 * @return
+	 */
 	@GetMapping(value = "/pets/search", produces = "application/json")
 	public List<Pet> getUserByUsername(@RequestParam(required = false) String name, @RequestParam(required = false) String tag, 
 										@RequestParam(required = false) String ownerName, @RequestParam(required = false) String ownerId ) {
@@ -69,6 +97,11 @@ public class PetController {
 	}
 	
 	
+	/**
+	 * the logged in user found in the logged in session bean will follow the pet with the given id and pet found in the body of the request
+	 * @param petToFollow
+	 * @return
+	 */
 	@PostMapping(value = "/pets/{id}/follow", consumes = "application/json", produces = "application/json")
 	public Pet followPet(@RequestBody Pet petToFollow) {
 		//will be the path called when user wants to follow a pet
@@ -77,6 +110,11 @@ public class PetController {
 		return null;
 	}
 	
+	/**
+	 * the logged in user found in the logged in session bean will unfollow the pet with the given id in the path and pet found in the body of the request.
+	 * @param petToUnfollow
+	 * @return
+	 */
 	@PostMapping(value = "/pets/{id}/unfollow", consumes = "application/json", produces = "application/json")
 	public Pet unfollowPet(@RequestBody Pet petToUnfollow) {
 		//will be the path called when user wants to unfollow a pet

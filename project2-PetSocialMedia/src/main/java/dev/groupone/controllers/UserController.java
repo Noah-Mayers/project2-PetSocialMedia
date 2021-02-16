@@ -20,12 +20,20 @@ public class UserController {
 	
 	
 	
-	
+	/**
+	 * returns a list of all users in the db
+	 * @return
+	 */
 	@GetMapping(value = "/users", produces = "application/json")
 	public List<User> getAllUsers() {
 		return null;
 	}
 	
+	/**
+	 * creates the user defined in the body. returns the created user
+	 * @param newUser
+	 * @return
+	 */
 	@PostMapping(value = "/users", consumes = "application/json", produces = "application/json")
 	public User createUser(@RequestBody User newUser) {
 		//creates the user with the given parameters 
@@ -36,13 +44,22 @@ public class UserController {
 	
 	
 	
-	
+	/**
+	 * returns a user object with the given id that is in the path, return 400 if it does not exist
+	 * @param id
+	 * @return
+	 */
 	@GetMapping(value = "/users/{id}", produces = "application/json")
 	public User getUser(@PathVariable("id") String id) {
 		//gets the user with the given id
 		return null;
 	}
-	
+	/**
+	 * updates the user with the given id in path with the User in the request body
+	 * @param id
+	 * @param updatedUser
+	 * @return
+	 */
 	@PutMapping(value = "/users/{id}", consumes = "application/json", produces = "application/json")
 	public User updateUser( @PathVariable("id") int id, @RequestBody User updatedUser) {
 		
@@ -50,6 +67,11 @@ public class UserController {
 		return null;
 	}
 	
+	/**
+	 * deletes user with the Id in the path 
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping(value = "/users/{id}")
 	public boolean deleteUser(@PathVariable("id") int id) {
 		System.out.println("Executing Delete");
@@ -57,7 +79,11 @@ public class UserController {
 		return false;
 	}
 	
-	
+	/**
+	 * searches user based on the name, can add more searching parameters 
+	 * @param username
+	 * @return
+	 */
 	@GetMapping(value = "/users/search", produces = "application/json")
 	public User getUserByUsername(@RequestParam(required = true) String username) {
 		//returns the user with the given username
@@ -65,6 +91,11 @@ public class UserController {
 	}
 	
 	
+	/**
+	 * Would be how one user the logged in user (found in the login bean) follows the user found in the body of the request
+	 * @param userToFollow
+	 * @return
+	 */
 	@PostMapping(value = "/users/{id}/follow", consumes = "application/json", produces = "application/json")
 	public User followUser(@RequestBody User userToFollow) {
 		//will be the path called when user wants to follow another user
