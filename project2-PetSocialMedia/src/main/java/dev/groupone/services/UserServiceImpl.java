@@ -30,6 +30,10 @@ public class UserServiceImpl implements UserService{
 		return (List<User>)urep.findAll();
 	}
 
+	@Override 
+	public User updateUser(User change) {
+		return urep.save(change);
+	}
 	@Override
 	public boolean deleteUser(int id) {
 		try {

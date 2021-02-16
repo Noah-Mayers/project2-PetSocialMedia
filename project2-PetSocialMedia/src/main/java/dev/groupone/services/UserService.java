@@ -11,5 +11,7 @@ public interface UserService {
 	//add special get methods here
 	public List<User> getAllUsers();
 	public boolean deleteUser(int id);
+	public User updateUser(User change);
+
 
 }
