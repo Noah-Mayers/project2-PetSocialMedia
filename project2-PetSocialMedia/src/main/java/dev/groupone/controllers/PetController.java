@@ -2,6 +2,7 @@ package dev.groupone.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.groupone.beans.Pet;
+import dev.groupone.services.PetService;
 
 
 @RestController
 public class PetController {
 	
-	
+	@Autowired
+	PetService ps;
 	
 	
 	/**
@@ -26,7 +29,7 @@ public class PetController {
 	 */
 	@GetMapping(value = "/pets", produces = "application/json")
 	public List<Pet> getAllPets() {
-		return null;
+		return ps.getAllPets();
 	}
 	
 	/**
@@ -38,7 +41,7 @@ public class PetController {
 	public Pet createUser(@RequestBody Pet newPet) {
 		//creates the user with the given parameters 
 		
-		return null;
+		return ps.addPet(newPet);
 	}
 	
 	
@@ -64,8 +67,8 @@ public class PetController {
 	@PutMapping(value = "/pets/{id}", consumes = "application/json", produces = "application/json")
 	public Pet updatePet( @PathVariable("id") int id, @RequestBody Pet updatedPet) {
 		
-		
-		return null;
+		updatedPet.setId(id);
+		return ps.updatePet(updatedPet);
 	}
 	
 	
@@ -78,7 +81,7 @@ public class PetController {
 	public boolean deletePet(@PathVariable("id") int id) {
 		System.out.println("Executing Delete");
 		
-		return false;
+		return ps.deletePet(id);
 	}
 	
 	/**

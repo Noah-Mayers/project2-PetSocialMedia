@@ -11,5 +11,6 @@ public interface PetService {
 	//add special get methods here
 	public List<Pet> getAllPets();
 	public boolean deletePet(int id);
+	public Pet updatePet(Pet change);
 
 }

@@ -38,4 +38,9 @@ public class PetServiceImpl implements PetService {
 		}
 	}
 
+	@Override
+	public Pet updatePet(Pet change) {
+		return pr.save(change);
+	}
+
 }
