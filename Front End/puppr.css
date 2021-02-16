@@ -4,12 +4,49 @@ body {
     width: 100vw;
 }
 
-.pane-logo {
-    background-color: #FFB27F;
-
+.pane-wide{
     float: left;
     width: 75%;
     height: 100%;
+}
+
+.pane-narrow{
+    float:left;
+    width:25%;
+    max-height:100%;
+    
+    overflow:hidden;
+}
+
+.pane-right{
+    position:fixed;
+    right:0;
+    top:0;
+}
+
+.pane-left{
+    position:fixed;
+    left:0;
+    top:0;
+}
+
+.pane-scrollable{
+    overflow: scroll;
+    min-height: 100vh;
+
+    padding-top:2%;
+}
+
+::-webkit-scrollbar{
+    display:none;
+}
+
+.pane-post{
+    margin-left: 7%;
+    padding: 3%;
+    background-color: white;
+    border-radius: 5%;
+    width: 80%;
 }
 
 .image-logo {
@@ -22,14 +59,13 @@ body {
     margin-top: 10%;
 }
 
-.pane-login{
-    float:left;
-    width: 25%;
-    height:100%;
+.image-avatar {
+    border-radius: 50%;
+}
 
-    position: absolute;
-    right:0;
-    top:0;
+.image-post {
+    width:100%;
+    border-radius: 5%;
 }
 
 .login-bar {
@@ -62,4 +98,10 @@ body {
     margin-left: 5%;
 
     font-size: xx-large;
+}
+
+.dash-button {
+    background-color: transparent;
+    border-color: transparent;
+    font-size: x-large;
 }

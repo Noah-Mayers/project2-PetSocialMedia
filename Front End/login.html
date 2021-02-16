@@ -8,11 +8,15 @@
     <link rel="stylesheet" type="text/css" href="puppr.css" />
 </head>
 <body id="body">
-    <div class="pane-logo">
+    <div class="pane-wide" style="background-color: #FFB27F;">
         <img src="logo-white.png" class="image-logo">
     </div>
 
-    <div id="login-pane" class="pane-login">
+    <div class="pane-narrow pane-right" style="height:100%">
+        <button id="switch-button" onclick="switchPane()" style="position: absolute; bottom:5%" class="round-button">sign up</button>
+    </div>
+
+    <div id="login-pane" class="pane-narrow pane-right">
         <input type="text" placeholder="username" class="login-bar"> <br>
         <input type="password" placeholder="password" class="login-bar"> <br>
         <button class="round-button"> log in </button> <br>
@@ -22,16 +26,12 @@
         </div>
     </div>
 
-    <div id="register-pane" class="pane-login" style="visibility: hidden;"> 
+    <div id="register-pane" class="pane-narrow pane-right" style="visibility: hidden;"> 
         <input type="text" placeholder="email" class="login-bar"> <br><br>
         <input type="text" placeholder="username" class="login-bar"> <br><br>
         <input type="password" placeholder="password" class="login-bar"> <br>
         <input type="password" placeholder="confirm" class="login-bar"> <br><br>
-        <button class="round-button"> register </button>
-    </div>
-
-    <div class="pane-login">
-        <button id="switch-button" onclick="switchPane()" style="position: absolute; bottom:5%" class="round-button">sign up</button>
+        <button class="round-button" onclick="console.log('register now!')"> register </button>
     </div>
 
 </body>
