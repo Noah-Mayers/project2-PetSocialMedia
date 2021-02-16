@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.groupone.beans.Pet;
-import dev.groupone.beans.User;
+
 
 @RestController
 public class PetController {
@@ -70,7 +70,7 @@ public class PetController {
 	
 	
 	@PostMapping(value = "/pets/{id}/follow", consumes = "application/json", produces = "application/json")
-	public User followPet(@RequestBody Pet petToFollow) {
+	public Pet followPet(@RequestBody Pet petToFollow) {
 		//will be the path called when user wants to follow a pet
 		// user making the request = logged in user, pet the loggin in user  wants to follow has id = {id}
 		// not implemented yet
@@ -78,7 +78,7 @@ public class PetController {
 	}
 	
 	@PostMapping(value = "/pets/{id}/unfollow", consumes = "application/json", produces = "application/json")
-	public User unfollowPet(@RequestBody Pet petToUnfollow) {
+	public Pet unfollowPet(@RequestBody Pet petToUnfollow) {
 		//will be the path called when user wants to unfollow a pet
 		// user making the request = logged in user, pet the loggin in user  wants to unfollow has id = {id}
 		// not implemented yet
