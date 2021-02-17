@@ -7,8 +7,135 @@
     
     <link rel="stylesheet" type="text/css" href="puppr.css" />
 </head>
+
 <body id="body">
+
+    <div class="pane-narrow pane-left" style="background-color: white;">
+        <div class="pane-left" style="margin-left: 3%; float:left">
+            <div style="height:85vh">
+
+
+                <br><br>
+                <div style="display:flex">
+                    <img src="logo-icon.png" style="width:10%">
+                    <button class="dash-button"><u>Home</u></button>
+                </div><br>
+
+                <div style="display:flex">
+                    <img src="logo-icon.png" style="width:10%">
+                    <button class="dash-button"><u>My Account</u></button>
+                </div><br><hr><br>
+
+                <div style="display:flex">
+                    <img src="avatar.png" class="image-avatar" style="width:10%">
+                    <button class="dash-button"><u>Pet 1</u></button>
+                </div><br>
+
+                <div style="display:flex">
+                    <img src="avatar.png" class="image-avatar" style="width:10%">
+                    <button class="dash-button"><u>Pet 2</u></button>
+                </div><br>
+
+                <div style="display:flex">
+                    <img src="avatar.png" class="image-avatar" style="width:10%">
+                    <button class="dash-button"><u>Pet 3</u></button>
+                </div><br>
+                
+            </div>
+            <div>
+                <div style="float:left; width:30%; height:10%;">
+                    <img src="avatar.png" class="image-avatar" style="width:80%">
+                </div>
+                <div style="float: left; width:70%; position:absolute; left:35%; font-size: xx-large;">
+                    <label><b>User</b></label><br>
+                    <label class="dash-button" style="margin-top: 1%; font-size: x-large;" onclick="logout()"><u>logout</u></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="pane-scrollable" style="position: absolute; height:100vh; left:25%; width:50%; background-color: #FFB27F;  border-left: 2px solid #af7a56;">
+        
+        <br><br>
+        <div class="pane-post" style="border-radius: 40px;">
+            <div style="display:flex">
+                <img class="image-avatar" src="avatar.png" style="width:25%;">
+                <div style="margin-left:5%;">
+                    <label style="font-size: xx-large;"> user@email.com </label> <br><br>
+                    <div style="display:flex">
+                       <input type="text" class="edit-bar" value="User" readonly>
+                       <img src="edit.png" class="image-icon-edit">
+                    </div><br>
+                    <div style="display:flex">
+                        <input type="password" class="edit-bar" value="password" readonly>
+                        <img src="edit.png" class="image-icon-edit">
+                     </div>
+                </div>
+            </div>
+        </div><br><Br>
+
+        <div class="pane-post" style="border-radius: 40px;">
+            <div style="display:flex">
+                <img class="image-avatar" src="avatar.png" style="width:17%;">
+                <div style="margin-left:5%;">
+                    <label style="font-size: xx-large;"> @Pet1 </label> <br><br>
+                    <div style="display:flex">
+                       <input type="text" class="edit-bar" value="Pet 1" readonly>
+                       <img src="edit.png" class="image-icon-edit">
+                    </div><br>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+        <div class="pane-post" style="border-radius: 40px;">
+            <div style="display:flex">
+                <img class="image-avatar" src="avatar.png" style="width:17%;">
+                <div style="margin-left:5%;">
+                    <label style="font-size: xx-large;"> @Pet2 </label> <br><br>
+                    <div style="display:flex">
+                       <input type="text" class="edit-bar" value="Pet 2" readonly>
+                       <img src="edit.png" class="image-icon-edit">
+                    </div><br>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+        <div class="pane-post" style="border-radius: 40px;">
+            <div style="display:flex">
+                <img class="image-avatar" src="avatar.png" style="width:17%;">
+                <div style="margin-left:5%;">
+                    <label style="font-size: xx-large;"> @Pet3 </label> <br><br>
+                    <div style="display:flex">
+                       <input type="text" class="edit-bar" value="Pet 3" readonly>
+                       <img src="edit.png" class="image-icon-edit">
+                    </div><br>
+                </div>
+            </div>
+        </div>
+        
+        <br><br>
+        <div class="pane-post" style="text-align: center;">
+            <label style="font-size: xx-large;">Add New Pet</label>
+        </div>
+        <br><br>
     
+    </div>
+
+
+
+    <div class="pane-narrow pane-right" style="align-content:center; height:100vh; background-color: white; border-left: 2px solid #af7a56; overflow:hidden;">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
+    </div>
 
 </body>
+
+<script>
+</script>
+
 </html>
