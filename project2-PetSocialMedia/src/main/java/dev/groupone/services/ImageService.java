@@ -11,5 +11,6 @@ public interface ImageService {
 	//add special get methods here
 	public List<Image> getAllImages();
 	public boolean deleteImage(int id);
+	public Image updateImage(Image change);
 
 }

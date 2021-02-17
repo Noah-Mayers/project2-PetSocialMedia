@@ -2,6 +2,7 @@ package dev.groupone.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,17 +12,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.groupone.beans.Image;
 import dev.groupone.beans.Pet;
+import dev.groupone.services.ImageService;
 
 @RestController
 public class ImageController {
+	
+	@Autowired
+	ImageService is;
 	
 	/**
 	 * gets all images in DB in a list
 	 * @return
 	 */
 	@GetMapping(value = "/images", produces = "application/json")
-	public List<Image> getAllPets() {
-		return null;
+	public List<Image> getAllImages() {
+		return is.getAllImages();
 	}
 	
 	/**
@@ -30,7 +35,7 @@ public class ImageController {
 	 * @return the image object
 	 */
 	@PostMapping(value = "/images", consumes = "application/json", produces = "application/json")
-	public Image createUser(@RequestBody Image newImage) {
+	public Image createImage(@RequestBody Image newImage) {
 		//creates the user with the given parameters 
 		
 		return null;
@@ -42,9 +47,9 @@ public class ImageController {
 	 * @return
 	 */
 	@GetMapping(value = "/images/{id}", produces = "application/json")
-	public Pet getImage(@PathVariable("id") String id) {
+	public Image getImage(@PathVariable("id") String id) {
 		//gets the user with the given id
-		return null;
+		return is.getImage(Integer.parseInt(id));
 	}
 	
 	/**
@@ -53,10 +58,10 @@ public class ImageController {
 	 * @return
 	 */
 	@DeleteMapping(value = "/images/{id}")
-	public boolean deletePet(@PathVariable("id") int id) {
+	public boolean deleteImage(@PathVariable("id") int id) {
 		System.out.println("Executing Delete");
 		
-		return false;
+		return is.deleteImage(id);
 	}
 	
 	
