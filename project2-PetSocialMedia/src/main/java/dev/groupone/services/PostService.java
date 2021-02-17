@@ -11,5 +11,6 @@ public interface PostService {
 	public Post getPost(int id);
 	//add special get methods here
 	public List<Post> getAllPosts();
+	public Post updatePost(Post change);
 	public boolean deletePost(int id);
 }

@@ -55,7 +55,7 @@ public class PetController {
 	@GetMapping(value = "/pets/{id}", produces = "application/json")
 	public Pet getPet(@PathVariable("id") String id) {
 		//gets the user with the given id
-		return null;
+		return ps.getPet(Integer.parseInt(id));
 	}
 	
 	/**

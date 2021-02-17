@@ -2,6 +2,7 @@ package dev.groupone.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,12 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import dev.groupone.beans.Post;
+import dev.groupone.services.PostService;
 
 
 @RestController
 public class PostController {
+	
+	@Autowired
+	PostService ps;
+	
 	
 	/**
 	 * gets all posts in DB in a list
@@ -24,7 +29,7 @@ public class PostController {
 	 */
 	@GetMapping(value = "/posts", produces = "application/json")
 	public List<Post> getAllPosts() {
-		return null;
+		return ps.getAllPosts(); 
 	}
 	
 	/**
@@ -36,7 +41,7 @@ public class PostController {
 	public Post createPost(@RequestBody Post newPost) {
 		//creates the user with the given parameters 
 		
-		return null;
+		return ps.addPost(newPost);
 	}
 	
 	
@@ -50,7 +55,7 @@ public class PostController {
 	@GetMapping(value = "/posts/{id}", produces = "application/json")
 	public Post getPost(@PathVariable("id") String id) {
 		//gets the user with the given id
-		return null;
+		return ps.getPost(Integer.parseInt(id));
 	}
 	
 	/**
@@ -61,9 +66,8 @@ public class PostController {
 	 */
 	@PutMapping(value = "/posts/{id}", consumes = "application/json", produces = "application/json")
 	public Post updatePost( @PathVariable("id") int id, @RequestBody Post updatedPost) {
-		
-		
-		return null;
+		updatedPost.setId(id);
+		return ps.updatePost(updatedPost);
 	}
 	
 	/**
@@ -75,7 +79,7 @@ public class PostController {
 	public boolean deletePost(@PathVariable("id") int id) {
 		System.out.println("Executing Delete");
 		
-		return false;
+		return ps.deletePost(id);
 	}
 	
 	/**

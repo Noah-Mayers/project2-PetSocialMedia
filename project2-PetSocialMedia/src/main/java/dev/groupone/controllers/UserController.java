@@ -54,7 +54,7 @@ public class UserController {
 	@GetMapping(value = "/users/{id}", produces = "application/json")
 	public User getUser(@PathVariable("id") String id) {
 		// gets the user with the given id
-		return null;
+		return as.getUser(Integer.parseInt(id));
 	}
 
 	/**
