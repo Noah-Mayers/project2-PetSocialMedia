@@ -1,17 +1,17 @@
 package dev.groupone.controllers;
 
-import java.util.List;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.groupone.beans.Pet;
 import dev.groupone.beans.User;
 
 @RestController
 public class LoginController {
+	
+	
 	
 	/**
 	 * returns a loginSession bean, User bean will be in place for now
@@ -32,7 +32,7 @@ public class LoginController {
 	@PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
 	public User attemptLogin(@RequestBody User user) {
 		//creates the user with the given parameters 
-		
+		System.out.println("Accessed Login Post");
 		return null;
 	}
 	

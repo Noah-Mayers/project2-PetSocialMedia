@@ -40,7 +40,8 @@ public class UserController {
 	@PostMapping(value = "/users", consumes = "application/json", produces = "application/json")
 	public User createUser(@RequestBody User newUser) {
 		// creates the user with the given parameters
-
+		System.out.println("User creation reached");
+		System.out.println(newUser);
 		return as.addUser(newUser);
 	}
 
