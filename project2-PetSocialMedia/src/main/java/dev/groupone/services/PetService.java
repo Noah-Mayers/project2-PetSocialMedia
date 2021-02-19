@@ -8,6 +8,7 @@ public interface PetService {
 	
 	public Pet addPet(Pet pet);
 	public Pet getPet(int id);
+	public Pet getPet(String tag);
 	//add special get methods here
 	public List<Pet> getAllPets();
 	public boolean deletePet(int id);

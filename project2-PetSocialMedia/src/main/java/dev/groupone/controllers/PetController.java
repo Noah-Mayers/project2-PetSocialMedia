@@ -3,6 +3,7 @@ package dev.groupone.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,11 @@ import dev.groupone.services.PetService;
 
 
 @RestController
+@Scope("session")
 public class PetController {
+	
+	@Autowired
+	LoginController lc;
 	
 	@Autowired
 	PetService ps;
@@ -86,43 +91,36 @@ public class PetController {
 	
 	/**
 	 * searches the db for pets with the matching parameters
-	 * @param name
 	 * @param tag
-	 * @param ownerName
-	 * @param ownerId
 	 * @return
 	 */
 	@GetMapping(value = "/pets/search", produces = "application/json")
-	public List<Pet> getUserByUsername(@RequestParam(required = false) String name, @RequestParam(required = false) String tag, 
-										@RequestParam(required = false) String ownerName, @RequestParam(required = false) String ownerId ) {
-		//returns the user with the given username
-		return null;
+	public Pet getPetByTag(@RequestParam(required = true) String tag) {
+		return ps.getPet(tag);
 	}
 	
 	
 	/**
 	 * the logged in user found in the logged in session bean will follow the pet with the given id and pet found in the body of the request
-	 * @param petToFollow
+	 * @param id (Pet)
 	 * @return
 	 */
 	@PostMapping(value = "/pets/{id}/follow", consumes = "application/json", produces = "application/json")
-	public Pet followPet(@RequestBody Pet petToFollow) {
-		//will be the path called when user wants to follow a pet
-		// user making the request = logged in user, pet the loggin in user  wants to follow has id = {id}
-		// not implemented yet
+	public Pet followPet(@PathVariable("id") int id, @RequestBody User loggedIn) {
+		// will be the path called when user wants to follow a pet
+		// user making the request = logged in user passed in RequestBody, pet the user wants to follow has id = {id}
 		return null;
 	}
 	
 	/**
 	 * the logged in user found in the logged in session bean will unfollow the pet with the given id in the path and pet found in the body of the request.
-	 * @param petToUnfollow
+	 * @param id (Pet)
 	 * @return
 	 */
 	@PostMapping(value = "/pets/{id}/unfollow", consumes = "application/json", produces = "application/json")
-	public Pet unfollowPet(@RequestBody Pet petToUnfollow) {
-		//will be the path called when user wants to unfollow a pet
-		// user making the request = logged in user, pet the loggin in user  wants to unfollow has id = {id}
-		// not implemented yet
+	public Pet unfollowPet(@PathVariable("id") int id, @RequestBody User loggedIn) {
+		// will be the path called when user wants to unfollow a pet
+		// user making the request = logged in user passed in RequestBody, pet the user wants to unfollow has id = {id}
 		return null;
 	}
 

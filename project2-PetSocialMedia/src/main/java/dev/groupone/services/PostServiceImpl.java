@@ -15,6 +15,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Post addPost(Post post) {
+		post.setPosted(new java.sql.Timestamp(new java.util.Date().getTime()));
 		return postr.save(post);
 	}
 

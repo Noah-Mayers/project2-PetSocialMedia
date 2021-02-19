@@ -21,6 +21,11 @@ public class PetServiceImpl implements PetService {
 	public Pet getPet(int id) {
 		return pr.findById(id).get();
 	}
+	
+	@Override
+	public Pet getPet(String tag) {
+		return pr.findByTag(tag);
+	}
 
 	@Override
 	public List<Pet> getAllPets() {
