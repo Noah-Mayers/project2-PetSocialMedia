@@ -81,14 +81,16 @@ CREATE TABLE posts (
 	id  				INT PRIMARY KEY,
 	author				INT NOT NULL,
 	caption				VARCHAR(280),
-	picture				INT
+	picture				INT,
+	posted				TimeStamp
 );
 
 CREATE TABLE comments (
 	id		INT PRIMARY KEY,
 	post	INT NOT NULL,
 	author 	INT NOT NULL,
-	body 	VARCHAR(280)
+	body 	VARCHAR(280),
+	posted	TimeStamp
 );
 
 
