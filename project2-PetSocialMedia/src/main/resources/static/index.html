@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<link rel="stylesheet" type="text/css" href="puppr.css" />
+</head>
+<body id="body">
+	<div class="pane-wide" style="background-color: #FFB27F;">
+		<img src="logo-white.png" class="image-logo">
+	</div>
+
+	<div class="pane-narrow pane-right" style="height: 100%">
+		<button id="switch-button" onclick="switchPane()"
+			style="position: absolute; bottom: 5%" class="round-button">sign
+			up</button>
+	</div>
+
+	<div id="login-pane" class="pane-narrow pane-right">
+		<input type="text" id="loginuser" placeholder="username"
+			class="login-bar"> <br> <input type="password"
+			id="loginpass" placeholder="password" class="login-bar"> <br>
+		<button class="round-button" onclick="loginuser()">log in</button>
+		<br>
+
+		<div style="margin-top: 2%; text-align: center; font-size: large;">
+			forgot your password? ruh roh<span style="color: #FFB27F"> <u>click
+					here</u></span>
+		</div>
+	</div>
+
+	<div id="register-pane" class="pane-narrow pane-right"
+		style="visibility: hidden;">
+		<input id="signemail" type="text" placeholder="email" class="login-bar"> <br>
+		<br> <input id="signuser" type="text" placeholder="username" class="login-bar">
+		<br> <br> <input id="signpass" type="password" placeholder="password"
+			class="login-bar"> <br> <input type="password"
+			placeholder="confirm" class="login-bar"> <br> <br>
+		<button class="round-button" onclick="signupuser()">
+			register</button>
+	</div>
+
+</body>
+
+<script>
+    function switchPane(){
+        let loginpane = document.getElementById("login-pane")
+        let registerpane = document.getElementById("register-pane")
+        let switchbutton = document.getElementById("switch-button")
+        let login = loginpane.style.visibility == "visible"
+
+        loginpane.style.visibility = login ? "hidden" : "visible"
+        registerpane.style.visibility = login ? "visible" : "hidden"
+        switchbutton.innerHTML = login ? "sign in" : "sign up"
+    }
+
+</script>
+
+<script>
+    function loginuser(){
+        let auser = document.getElementById("loginuser").value;
+        let apassword = document.getElementById("loginpass").value;
+        let user = {
+            "username": auser,
+            "password": apassword
+        }
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200){
+            	console.log('User Initiated')
+            	let user = JSON.parse(this.responseText);
+                if(user.id != 0){
+                    (function(){
+                        console.log('Redirecting')
+                        window.location.replace('http://localhost:8080/dashboard.html');
+                    })();
+                }
+                else{
+                	window.alert("Invalid Username/Password")
+                } 
+            }
+           
+            }
+        };
+        xhttp.open("POST", "http://localhost:8080/login", true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.send(JSON.stringify(user));
+
+
+    }
+    
+
+</script>
+
+<script>
+
+    function signupuser() {
+        let aemail =  document.getElementById("signemail").value;
+        let auser = document.getElementById("signuser").value;
+        let apass = document.getElementById("signpass").value;
+
+        let user = {
+            id: 0,
+            email: aemail,
+            username: auser,
+            account_password: apass
+
+        }
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200){
+                let user = JSON.parse(this.responseText);
+                console.log(user.username + " Created Succesfully")
+            }
+        }
+        xhttp.open("POST", "http://localhost:8080/users", true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.send(JSON.stringify(user));
+    }
+</script>
+</html>

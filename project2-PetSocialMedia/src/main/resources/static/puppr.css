@@ -1,0 +1,107 @@
+body {
+    margin: 0%;
+    height: 100vh;
+    width: 100vw;
+}
+
+.pane-wide{
+    float: left;
+    width: 75%;
+    height: 100%;
+}
+
+.pane-narrow{
+    float:left;
+    width:25%;
+    max-height:100%;
+    
+    overflow:hidden;
+}
+
+.pane-right{
+    position:fixed;
+    right:0;
+    top:0;
+}
+
+.pane-left{
+    position:fixed;
+    left:0;
+    top:0;
+}
+
+.pane-scrollable{
+    overflow: scroll;
+    min-height: 100vh;
+
+    padding-top:2%;
+}
+
+::-webkit-scrollbar{
+    display:none;
+}
+
+.pane-post{
+    margin-left: 7%;
+    padding: 3%;
+    background-color: white;
+    border-radius: 5%;
+    width: 80%;
+}
+
+.image-logo {
+    display: block;
+    width: 40%;
+    height: auto;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+}
+
+.image-avatar {
+    border-radius: 50%;
+}
+
+.image-post {
+    width:100%;
+    border-radius: 5%;
+}
+
+.login-bar {
+    margin-top: 5%;
+    margin-left: 5%;
+
+    width: 90%;
+    height: 5%;
+    background-color: white;
+    border-width: 10%;
+
+    font-size: xx-large;
+}
+
+.login-bar:focus, .login-bar:active {
+    border-color: #FFB27F;
+    border-width: 10%;
+}
+
+.round-button {
+    color: white;
+    border-radius: 20px;
+    border-color: transparent;
+    background-color: #FFB27F;
+
+    width:90%;
+
+    
+    margin-top: 5%;
+    margin-left: 5%;
+
+    font-size: xx-large;
+}
+
+.dash-button {
+    background-color: transparent;
+    border-color: transparent;
+    font-size: x-large;
+}

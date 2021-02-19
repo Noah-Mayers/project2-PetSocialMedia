@@ -62,6 +62,14 @@ public class Post {
 		this.picture = picture;
 		this.author = author;
 	}
+	
+	
+	
+
+	public Post(User author) {
+		super();
+		this.author = author;
+	}
 
 	public int getId() {
 		return id;

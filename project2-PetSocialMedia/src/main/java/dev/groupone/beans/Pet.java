@@ -67,6 +67,15 @@ public class Pet {
 		this.pet_owner = pet_owner;
 		this.followers = followers;
 	}
+	
+	
+
+	public Pet(String name, String tag, User pet_owner) {
+		super();
+		this.name = name;
+		this.tag = tag;
+		this.pet_owner = pet_owner;
+	}
 
 	public Pet() {
 		super();
