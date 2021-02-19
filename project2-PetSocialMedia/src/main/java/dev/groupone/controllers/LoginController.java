@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.groupone.beans.User;
 import dev.groupone.services.UserService;
 
-@Controller
+@RestController
 @Scope("session")
 public class LoginController {
 	
