@@ -23,6 +23,12 @@ public class UserServiceImpl implements UserService{
 	public User getUser(int id) {
 		return urep.findById(id).get();
 	}
+	
+	@Override
+	public User getUser(String username) {
+		return urep.findByUsername(username);
+	}
+
 
 	@Override
 	public List<User> getAllUsers() {
@@ -45,4 +51,5 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	
 }
