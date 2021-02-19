@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dev.groupone.beans.Comment;
+import dev.groupone.beans.Post;
 import dev.groupone.repositories.CommentRepo;
 
 public class CommentServiceImpl implements CommentService{
@@ -21,6 +22,11 @@ public class CommentServiceImpl implements CommentService{
 	@Override
 	public Comment getComment(int id) {
 		return cr.findById(id).get();
+	}
+	
+	@Override
+	public List<Comment> getAllCommentsForPost(Post post) {
+		return (List<Comment>)cr.findByPost(post);
 	}
 
 	@Override
@@ -43,5 +49,7 @@ public class CommentServiceImpl implements CommentService{
 			return false;
 		}
 	}
+
+	
 
 }
