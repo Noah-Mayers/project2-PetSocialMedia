@@ -90,12 +90,12 @@ public class User {
 		this.username = username;
 	}
 
-	public String getAccount_password() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setAccount_password(String account_password) {
-		this.password = account_password;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getBio() {
@@ -110,14 +110,14 @@ public class User {
 		return profilePicture;
 	}
 
-	public void setProfile_picture(Image profile_picture) {
-		this.profilePicture = profile_picture;
+	public void setProfile_picture(Image profilePicture) {
+		this.profilePicture = profilePicture;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", username=" + username + ", account_password="
-				+ password + ", bio=" + bio + ", profile_picture=" + profilePicture + "]";
+		return "User [id=" + id + ", email=" + email + ", username=" + username + ", password="
+				+ password + ", bio=" + bio + ", profilePicture=" + profilePicture + "]";
 	}
 
 }
