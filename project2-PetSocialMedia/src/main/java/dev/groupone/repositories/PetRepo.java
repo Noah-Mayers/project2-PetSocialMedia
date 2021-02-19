@@ -7,5 +7,5 @@ import dev.groupone.beans.Pet;
 
 @Repository
 public interface PetRepo extends CrudRepository<Pet, Integer> {
-
+	Pet findByTag(String tag);
 }

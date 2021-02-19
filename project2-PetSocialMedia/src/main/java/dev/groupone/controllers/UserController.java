@@ -92,8 +92,7 @@ public class UserController {
 	 */
 	@GetMapping(value = "/users/search", produces = "application/json")
 	public User getUserByUsername(@RequestParam(required = true) String username) {
-		// returns the user with the given username
-		return null;
+		return as.getUser(username);
 	}
 
 	/**
