@@ -11,6 +11,8 @@ ALTER TABLE pets_tagged_in_posts	DROP CONSTRAINT pet_id_fk;
 ALTER TABLE pets_tagged_in_posts 	DROP CONSTRAINT post_id_fk;
 ALTER TABLE post_likes 				DROP CONSTRAINT user_id_fk;
 ALTER TABLE post_likes 				DROP CONSTRAINT post_id_fk;
+ALTER TABLE comments 				DROP CONSTRAINT author_fk;
+ALTER TABLE comments 				DROP CONSTRAINT post_fk;
 -- constraints dropped 
 
 -- droping tables
@@ -21,6 +23,7 @@ DROP TABLE pet_followers;
 DROP TABLE posts;
 DROP TABLE pets_tagged_in_posts;
 DROP TABLE post_likes;
+DROP TABLE comments;
 -- tables dropped 
 
 
@@ -29,6 +32,7 @@ DROP SEQUENCE user_seq;
 DROP SEQUENCE pet_seq;
 DROP SEQUENCE post_seq;
 DROP SEQUENCE image_seq;
+DROP SEQUENCE comment_seq;
 -- sequences dropped
 
 
@@ -80,6 +84,13 @@ CREATE TABLE posts (
 	picture				INT
 );
 
+CREATE TABLE comments (
+	id		INT PRIMARY KEY,
+	post	INT NOT NULL,
+	author 	INT NOT NULL,
+	body 	VARCHAR(280)
+);
+
 
 
 CREATE TABLE pets_tagged_in_posts (
@@ -126,6 +137,15 @@ ALTER TABLE post_likes 				ADD CONSTRAINT user_id_fk FOREIGN KEY (user_id) REFER
 																					ON DELETE CASCADE;
 ALTER TABLE post_likes 				ADD CONSTRAINT post_id_fk FOREIGN KEY (post_id) REFERENCES posts (id)
 																					ON DELETE CASCADE;
+																				
+ALTER TABLE comments 				ADD CONSTRAINT author_fk FOREIGN KEY (author) REFERENCES users (id)
+																					ON DELETE CASCADE;
+ALTER TABLE comments 				ADD CONSTRAINT post_fk FOREIGN KEY (post) REFERENCES posts (id)
+																					ON DELETE CASCADE;
+																				
+																				
+																				
+																				
 -- finished Fk's 
 -- making sequences
 CREATE SEQUENCE user_seq
@@ -138,6 +158,9 @@ CREATE SEQUENCE post_seq
 	INCREMENT 1
 	START 1;
 CREATE SEQUENCE image_seq
+	INCREMENT 1
+	START 1;
+CREATE SEQUENCE comment_seq
 	INCREMENT 1
 	START 1;
 --made sequences 
