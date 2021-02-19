@@ -3,6 +3,7 @@ package dev.groupone.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,11 @@ import dev.groupone.services.PetService;
 
 
 @RestController
+@Scope("session")
 public class PetController {
+	
+	@Autowired
+	LoginController lc;
 	
 	@Autowired
 	PetService ps;
