@@ -28,6 +28,7 @@ public class Post {
 
 	private String caption;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "picture")
 	private Image picture;
@@ -44,25 +45,14 @@ public class Post {
 	@JoinTable(name = "post_likes", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> likes;
 	
+	private java.sql.Timestamp posted;
+
+	
+	
+	
 	public Post() {
 		super();
 	}
-
-	public Post(int id, String caption, Image picture, User author) {
-		super();
-		this.id = id;
-		this.caption = caption;
-		this.picture = picture;
-		this.author = author;
-	}
-
-	public Post(String caption, Image picture, User author) {
-		super();
-		this.caption = caption;
-		this.picture = picture;
-		this.author = author;
-	}
-	
 	
 	
 
@@ -70,6 +60,8 @@ public class Post {
 		super();
 		this.author = author;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -87,11 +79,11 @@ public class Post {
 		this.caption = caption;
 	}
 
-	public Image getpicture() {
+	public Image getPicture() {
 		return picture;
 	}
 
-	public void setpicture(Image picture) {
+	public void setPicture(Image picture) {
 		this.picture = picture;
 	}
 
@@ -103,10 +95,36 @@ public class Post {
 		this.author = author;
 	}
 
+	public List<Pet> getPets() {
+		return pets;
+	}
+
+	public void setPets(List<Pet> pets) {
+		this.pets = pets;
+	}
+
+	public List<User> getLikes() {
+		return likes;
+	}
+
+	public void setLikes(List<User> likes) {
+		this.likes = likes;
+	}
+
+	public java.sql.Timestamp getPosted() {
+		return posted;
+	}
+
+	public void setPosted(java.sql.Timestamp posted) {
+		this.posted = posted;
+	}
+
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", caption=" + caption + ", picture=" + picture + ", author="
-				+ author + "]";
+		return "Post [id=" + id + ", caption=" + caption + ", picture=" + picture + ", author=" + author + ", pets="
+				+ pets + ", likes=" + likes + ", posted=" + posted + "]";
 	}
+	
+	
 
 }
