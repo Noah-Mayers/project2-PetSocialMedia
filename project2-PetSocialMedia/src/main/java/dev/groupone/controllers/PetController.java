@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.groupone.beans.Pet;
+import dev.groupone.beans.User;
 import dev.groupone.services.PetService;
 
 
@@ -21,7 +22,6 @@ public class PetController {
 	
 	@Autowired
 	PetService ps;
-	
 	
 	/**
 	 * gets all pets in DB in a list
