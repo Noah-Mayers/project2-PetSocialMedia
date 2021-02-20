@@ -50,12 +50,7 @@ public class Pet {
 	private List<User> followers;
 
 	
-	 @ManyToMany(fetch = FetchType.LAZY,
-	            cascade = {
-	                CascadeType.PERSIST,
-	                CascadeType.MERGE
-	            },
-	            mappedBy = "pets")
+	 @ManyToMany(fetch = FetchType.LAZY, mappedBy = "pets")
 	 private List<Post> posts;
 	
 	
