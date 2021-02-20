@@ -59,6 +59,15 @@ public class Post {
 	}
 	
 	
+	public void tagPetToPost(Pet pet) {
+		this.pets.add(pet);
+	}
+	
+	public void untaggPetToPost(Pet pet) {
+		this.pets.remove(pet);
+	}
+	
+	
 	public Post() {
 		super();
 	}
