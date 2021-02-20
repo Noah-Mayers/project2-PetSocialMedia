@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.groupone.beans.Pet;
 import dev.groupone.beans.User;
+import dev.groupone.services.PetService;
 import dev.groupone.services.UserService;
 
 @RestController
@@ -25,6 +27,9 @@ public class UserController {
 
 	@Autowired
 	UserService as;
+	
+	@Autowired
+	PetService ps;
 
 	/**
 	 * returns a list of all users in the db
@@ -87,6 +92,19 @@ public class UserController {
 		System.out.println("Executing Delete");
 
 		return as.deleteUser(id);
+	}
+	
+	/**
+	 * returns a list of the users pets that they own
+	 * @param id
+	 * @return
+	 */
+	@GetMapping(value = "/users/{id}/pets", produces = "application/json")
+	public List<Pet> getUsersPets(@PathVariable("id") String id) {
+		// gets the user with the given id
+		
+		User user = as.getUser(Integer.parseInt(id));
+		return ps.getAllUserPets(user);
 	}
 
 	/**

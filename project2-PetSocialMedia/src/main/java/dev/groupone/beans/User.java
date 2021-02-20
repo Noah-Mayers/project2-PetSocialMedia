@@ -37,10 +37,8 @@ public class User {
 	
 	private String bio;
 	
-	//@JoinColumn(name = "pet_owner", )
-	@OneToMany(mappedBy = "owner", fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
-	private List<Pet> pets; 
+	
+	
 
 	@ManyToOne
 	@JoinColumn(name = "profile_picture")
@@ -126,13 +124,7 @@ public class User {
 	
 	
 
-	public List<Pet> getPets() {
-		return pets;
-	}
-
-	public void setPets(List<Pet> pets) {
-		this.pets = pets;
-	}
+	
 
 	public Image getProfilePicture() {
 		return profilePicture;

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.groupone.beans.Pet;
+import dev.groupone.beans.User;
 import dev.groupone.repositories.PetRepo;
 
 @Service
@@ -46,6 +47,11 @@ public class PetServiceImpl implements PetService {
 	@Override
 	public Pet updatePet(Pet change) {
 		return pr.save(change);
+	}
+
+	@Override
+	public List<Pet> getAllUserPets(User user) {
+		return (List<Pet>) pr.findByOwner(user);
 	}
 
 }
