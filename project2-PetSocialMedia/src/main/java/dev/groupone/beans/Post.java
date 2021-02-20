@@ -38,17 +38,25 @@ public class Post {
 	@JoinColumn(name = "author", nullable = false)
 	private User author;
 	
-	@ManyToMany(fetch =  FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch =  FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinTable(name = "pets_tagged_in_posts", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "pet_id"))
 	private List<Pet> pets;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinTable(name = "post_likes", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> likes;
 	
 	private java.sql.Timestamp posted;
 
 	
+	
+	public void addUserLike(User user) {
+		this.likes.add(user);
+	}
+	
+	public void removeUserLike(User user) {
+		this.likes.remove(user);
+	}
 	
 	
 	public Post() {
