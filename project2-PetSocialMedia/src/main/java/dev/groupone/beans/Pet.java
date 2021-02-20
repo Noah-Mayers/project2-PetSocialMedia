@@ -2,6 +2,7 @@ package dev.groupone.beans;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,6 +49,16 @@ public class Pet {
 	@JoinTable(name = "pet_followers", joinColumns = @JoinColumn(name = "pet_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> followers;
 
+	
+	 @ManyToMany(fetch = FetchType.LAZY,
+	            cascade = {
+	                CascadeType.PERSIST,
+	                CascadeType.MERGE
+	            },
+	            mappedBy = "pets")
+	 private List<Post> posts;
+	
+	
 	public Pet(int id, String name, String tag, String bio, Image profilePicture, User owner,
 			List<User> followers) {
 		super();
