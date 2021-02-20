@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="puppr.css" />
 </head>
 
-<body id="body">
+<body id="body" onload="sessInfo()">
 
     <div class="pane-narrow pane-left" style="background-color: white;">
         <div class="pane-left" style="margin-left: 3%; float:left">
@@ -47,7 +47,7 @@
                     <img src="avatar.png" class="image-avatar" style="width:80%">
                 </div>
                 <div style="float: left; width:70%; position:absolute; left:35%; font-size: xx-large;">
-                    <label><b>User</b></label><br>
+                    <label id="sessUser"><b>User</b></label><br>
                     <label class="dash-button" style="margin-top: 1%; font-size: x-large;" onclick="logout()"><u>logout</u></label>
                 </div>
             </div>
@@ -142,6 +142,7 @@
 
 </body>
 
+<script src="homepage.js"></script>
 <script>
 </script>
 

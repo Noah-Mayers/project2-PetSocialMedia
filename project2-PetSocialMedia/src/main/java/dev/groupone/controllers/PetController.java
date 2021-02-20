@@ -28,7 +28,6 @@ public class PetController {
 	@Autowired
 	PetService ps;
 	
-	
 	/**
 	 * gets all pets in DB in a list
 	 * @return
