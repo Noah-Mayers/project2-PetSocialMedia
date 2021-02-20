@@ -52,7 +52,7 @@ public class PetServiceImpl implements PetService {
 	@Override
 	public List<Pet> getAllUserPets(User user) {
 
-		return (List<Pet>) pr.findByOwner(user.getId());
+		return (List<Pet>) pr.findByOwner(user);
 	}
 
 }

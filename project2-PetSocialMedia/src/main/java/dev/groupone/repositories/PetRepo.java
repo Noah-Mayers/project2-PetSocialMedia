@@ -12,5 +12,5 @@ import dev.groupone.beans.User;
 public interface PetRepo extends CrudRepository<Pet, Integer> {
 	Pet findByTag(String tag);
 	
-	List<Pet> findByOwner(int owner);
+	List<Pet> findByOwner(User owner);
 }
