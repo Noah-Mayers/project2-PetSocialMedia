@@ -38,15 +38,15 @@ public class Pet {
 	@JoinColumn(name = "pet_profile_picture")
 	private Image profilePicture;
 	
-	@ManyToOne
-	@JoinColumn(name = "pet_owner", nullable = false)
-	private User owner;
+	
+	@Column(nullable = false, name = "pet_owner")
+	private int owner;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "pet_followers", joinColumns = @JoinColumn(name = "pet_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> followers;
 
-	public Pet(int id, String name, String tag, String bio, Image profilePicture, User owner,
+	public Pet(int id, String name, String tag, String bio, Image profilePicture, int owner,
 			List<User> followers) {
 		super();
 		this.id = id;
@@ -58,7 +58,7 @@ public class Pet {
 		this.followers = followers;
 	}
 
-	public Pet(String name, String tag, String bio, Image profilePicture, User pet_owner, List<User> followers) {
+	public Pet(String name, String tag, String bio, Image profilePicture, int pet_owner, List<User> followers) {
 		super();
 		this.name = name;
 		this.tag = tag;
@@ -70,7 +70,7 @@ public class Pet {
 	
 	
 
-	public Pet(String name, String tag, User pet_owner) {
+	public Pet(String name, String tag, int pet_owner) {
 		super();
 		this.name = name;
 		this.tag = tag;
@@ -121,11 +121,11 @@ public class Pet {
 		this.profilePicture = profilePicture;
 	}
 
-	public User getOwner() {
+	public int getOwner() {
 		return owner;
 	}
 
-	public void setPet_owner(User owner) {
+	public void setPet_owner(int owner) {
 		this.owner = owner;
 	}
 
