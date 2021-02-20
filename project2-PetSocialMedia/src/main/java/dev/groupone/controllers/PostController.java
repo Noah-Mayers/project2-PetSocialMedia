@@ -1,5 +1,6 @@
 package dev.groupone.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.groupone.beans.Pet;
 import dev.groupone.beans.Post;
+import dev.groupone.services.PetService;
 import dev.groupone.services.PostService;
 
 
@@ -25,7 +28,10 @@ public class PostController {
 	LoginController lc;
 	
 	@Autowired
-	PostService ps;
+	private PostService ps;
+	
+	@Autowired
+	private PetService petService;
 	
 	
 	/**
@@ -44,9 +50,15 @@ public class PostController {
 	 */
 	@PostMapping(value = "/posts", consumes = "application/json", produces = "application/json")
 	public Post createPost(@RequestBody Post newPost) {
-		//creates the user with the given parameters 
-		
-		return ps.addPost(newPost);
+		List<Pet> attachedPets = newPost.getPets();
+		newPost.setPets(null);
+		Post postedPost = ps.addPost(newPost);
+		postedPost.setPets(attachedPets);
+		for(int i = 0; i < attachedPets.size(); i++) {
+			attachedPets.get(i).addToPost(postedPost);
+		}
+		ps.updatePost(postedPost);
+		return postedPost;
 	}
 	
 	
