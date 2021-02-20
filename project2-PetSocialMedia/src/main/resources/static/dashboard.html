@@ -6,6 +6,9 @@
     <title>My Feed</title>
     
     <link rel="stylesheet" type="text/css" href="puppr.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body id="body" onload="sessInfo()">
@@ -27,18 +30,22 @@
                 </div><br><hr><br>
 
                 <div style="display:flex">
-                    <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button"><u>Pet 1</u></button>
+                    <label style="font-size: x-large; text-indent: 30%;"><b>Post:</b></label>
                 </div><br>
 
                 <div style="display:flex">
                     <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button"><u>Pet 2</u></button>
+                    <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 1')"><u>Pet 1</u></button>
                 </div><br>
 
                 <div style="display:flex">
                     <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button"><u>Pet 3</u></button>
+                    <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 2')"><u>Pet 2</u></button>
+                </div><br>
+
+                <div style="display:flex">
+                    <img src="avatar.png" class="image-avatar" style="width:10%">
+                    <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 3')"><u>Pet 3</u></button>
                 </div><br>
                 
             </div>
@@ -138,6 +145,42 @@
         <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
         <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
         <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
+    </div>
+
+     <!-- Modal -->
+     <div class="modal fade" id="post-popup" role="dialog">
+        <div class="modal-dialog">
+            <div class="pane-modal">
+                <div class="modal-header">
+                    <h2 id="post-popup-header" class="modal-title">Make a Post</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-area" style="border: 1px solid black; font-size: medium;">
+                        <div style="display:flex">
+                            <input type="checkbox" name="pet" value="Pet1">
+                            <img src="avatar.png" class="image-avatar image-avatar-checkbox">
+                            <label>Pet 1</label>
+                        </div><br>
+                        <div style="display:flex">
+                            <input type="checkbox" name="pet" value="Pet1">
+                            <img src="avatar.png" class="image-avatar image-avatar-checkbox">
+                            <label>Pet 2</label>
+                        </div><br>
+                        <div style="display:flex">
+                            <input type="checkbox" name="pet" value="Pet1">
+                            <img src="avatar.png" class="image-avatar image-avatar-checkbox">
+                            <label>Pet 3</label>
+                        </div>
+                    </div><br>
+                    <textarea class="modal-area" placeholder="Add a caption!"></textarea>
+                    <button class="modal-button" style="width:93%; margin-bottom: 5px;">Upload</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="modal-button" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="modal-button" data-dismiss="modal" onclick="post()">Submit</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

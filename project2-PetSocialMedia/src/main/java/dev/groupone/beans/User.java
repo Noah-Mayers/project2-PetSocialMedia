@@ -37,9 +37,6 @@ public class User {
 	
 	private String bio;
 	
-	
-	
-
 	@ManyToOne
 	@JoinColumn(name = "profile_picture")
 	private Image profilePicture;
