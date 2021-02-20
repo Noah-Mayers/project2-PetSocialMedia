@@ -37,7 +37,7 @@ public class Post {
 	@JoinColumn(name = "author", nullable = false)
 	private User author;
 	
-	@ManyToMany(fetch =  FetchType.EAGER)
+	@ManyToMany(fetch =  FetchType.LAZY)
 	@JoinTable(name = "pets_tagged_in_posts", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "pet_id"))
 	private List<Pet> pets;
 	

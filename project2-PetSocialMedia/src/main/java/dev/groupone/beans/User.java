@@ -2,6 +2,7 @@ package dev.groupone.beans;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,8 +37,9 @@ public class User {
 	
 	private String bio;
 	
-	@OneToMany()
-	@JoinColumn(name = "pet_owner")
+	//@JoinColumn(name = "pet_owner", )
+	@OneToMany(mappedBy = "owner", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
 	private List<Pet> pets; 
 
 	@ManyToOne

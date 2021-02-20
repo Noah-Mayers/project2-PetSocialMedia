@@ -40,13 +40,13 @@ public class Pet {
 	
 	@ManyToOne
 	@JoinColumn(name = "pet_owner", nullable = false)
-	private User pet_owner;
+	private User owner;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "pet_followers", joinColumns = @JoinColumn(name = "pet_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> followers;
 
-	public Pet(int id, String name, String tag, String bio, Image profilePicture, User pet_owner,
+	public Pet(int id, String name, String tag, String bio, Image profilePicture, User owner,
 			List<User> followers) {
 		super();
 		this.id = id;
@@ -54,7 +54,7 @@ public class Pet {
 		this.tag = tag;
 		this.bio = bio;
 		this.profilePicture = profilePicture;
-		this.pet_owner = pet_owner;
+		this.owner = owner;
 		this.followers = followers;
 	}
 
@@ -64,7 +64,7 @@ public class Pet {
 		this.tag = tag;
 		this.bio = bio;
 		this.profilePicture = profilePicture;
-		this.pet_owner = pet_owner;
+		this.owner = pet_owner;
 		this.followers = followers;
 	}
 	
@@ -74,7 +74,7 @@ public class Pet {
 		super();
 		this.name = name;
 		this.tag = tag;
-		this.pet_owner = pet_owner;
+		this.owner = pet_owner;
 	}
 
 	public Pet() {
@@ -121,12 +121,12 @@ public class Pet {
 		this.profilePicture = profilePicture;
 	}
 
-	public User getPet_owner() {
-		return pet_owner;
+	public User getOwner() {
+		return owner;
 	}
 
-	public void setPet_owner(User pet_owner) {
-		this.pet_owner = pet_owner;
+	public void setPet_owner(User owner) {
+		this.owner = owner;
 	}
 
 	public List<User> getFollowers() {
@@ -140,7 +140,7 @@ public class Pet {
 	@Override
 	public String toString() {
 		return "Pet [id=" + id + ", name=" + name + ", tag=" + tag + ", bio=" + bio + ", profilePicture="
-				+ profilePicture + ", pet_owner=" + pet_owner + ", followers=" + followers + "]";
+				+ profilePicture + ", owner=" + owner + ", followers=" + followers + "]";
 	}
 	
 	
