@@ -1,12 +1,16 @@
 package dev.groupone.beans;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -31,6 +35,10 @@ public class User {
 	
 	
 	private String bio;
+	
+	@OneToMany()
+	@JoinColumn(name = "pet_owner")
+	private List<Pet> pets; 
 
 	@ManyToOne
 	@JoinColumn(name = "profile_picture")
@@ -111,6 +119,24 @@ public class User {
 	}
 
 	public void setProfile_picture(Image profilePicture) {
+		this.profilePicture = profilePicture;
+	}
+	
+	
+
+	public List<Pet> getPets() {
+		return pets;
+	}
+
+	public void setPets(List<Pet> pets) {
+		this.pets = pets;
+	}
+
+	public Image getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(Image profilePicture) {
 		this.profilePicture = profilePicture;
 	}
 
