@@ -28,8 +28,8 @@ xhttp.onreadystatechange = function (){
             let outputHtml = output.innerHTML;
             
             let pets = "";
-        for(let j = 0; input[i].pets.length; j++){
-            pets += `${input[i].pets[i].name} `;
+        for(let j = 0; j < input[i].pets.length ; j++){
+            pets += `${input[i].pets[j].name} `;
         }
             //Actual Post 
         outputHtml += `<div class="pane-post">
@@ -39,10 +39,10 @@ xhttp.onreadystatechange = function (){
             </div>
             <p style="font-size: large;">${input[i].caption}</p>
             <hr>
-            <img class="image-post" src="test-post.png">
+            <img class="image-post" src="https://proj2buck.s3.amazonaws.com/1.jpg">
             <hr>
             <div style="display:flex; font-size: x-large;">
-                With: <label style="color:#FFB27F"><u></u></label>
+                With: <label style="color:#FFB27F"><u>${pets}</u></label>
                 <div style="text-align: right; font-size: large;">
                     <img src=logo-grey.png style="width:5%">
                     <label> 0 </label>
