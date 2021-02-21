@@ -31,7 +31,7 @@ function loadpets(){
   
             outputHtml +=  `<div style="display:flex">
             <img src="avatar.png" class="image-avatar" style="width:10%">
-            <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 1')"><u>${petinput[i].name}</u></button>
+            <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="console.log(69)"><u>${petinput[i].name}</u></button>
             </div><br>`;
 
             output.innerHTML = outputHtml;    
@@ -98,6 +98,21 @@ xhttp.onreadystatechange = function (){
         
         output.innerHTML = outputHtml;
         }
+        //Will Load Dynamic Checkboxes for doing a Post
+        petinput.length;
+        for(let f = 0; f < petinput.length; f++){
+            let secoutput = document.getElementById("petselection");
+            let secoutputHtml = secoutput.innerHTML;
+            let check = "check" + petinput[f].id;
+            secoutputHtml += `<div style="display:flex">
+            <input type="checkbox" id="${f}" name="${petinput[f].tag}" value="${petinput[f].id}">
+            <img src="avatar.png" class="image-avatar image-avatar-checkbox">
+            <label>${petinput[f].name}</label>
+        </div><br>`;
+
+        secoutput.innerHTML = secoutputHtml;
+        }
+
     }
 }
 
@@ -182,4 +197,67 @@ function unlike(x){
     xhttp.open("DELETE", "http://localhost:8080/posts/" + x + "/like", true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(sessionuser));
+}
+
+
+// //Will Load Dynamic Checkboxes for doing a Post
+// function doPost(){
+//         petinput.length;
+//         for(let f = 0; f < petinput.length; f++){
+//             let secoutput = document.getElementById("petselection");
+//             let secoutputHtml = output.innerHTML;
+//             let check = "check" + petinput[f].id;
+//             secoutputHtml += `<div style="display:flex">
+//             <input type="checkbox" id="${f}" name="${petinput[f].tag}" value="${petinput[f].id}">
+//             <img src="avatar.png" class="image-avatar image-avatar-checkbox">
+//             <label>${petinput[f].name}</label>
+//         </div><br>`;
+
+//         secoutput.innerHTML = outputHtml;
+//         }
+
+// }
+
+
+//Will Make Post
+function post(){
+
+    //The goal here is to get the tagged pets to be added to the post
+    let thepets = [];
+    let acaption = null;
+    if(document.getElementById("usercaption").value == null || document.getElementById("usercaption").value == undefined ){
+        acaption = "";
+    }
+    else{
+        acaption = document.getElementById("usercaption").value;
+    }
+
+    for(let n = 0; n < petinput.length; n++){
+        if(document.getElementById(`${n}`).checked == true){
+            console.log("It is checked");
+            thepets.push(petinput[n]); 
+            console.log("Pet being tagged: " + JSON.stringify(petinput[n]));
+        }
+        else{
+            console.log("It is unchecked");
+        }
+    }
+
+    let post = {
+        id: 0,
+        caption: acaption,
+        author: sessionuser,
+        pets: thepets,
+    }
+
+    let xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+                let newpost = JSON.parse(this.responseText);
+                console.log(newpost);
+				}
+		}
+		xhttp.open("POST", "http://localhost:8080/posts", true);
+		xhttp.setRequestHeader('Content-Type', 'application/json');
+		xhttp.send(JSON.stringify(post));
 }
