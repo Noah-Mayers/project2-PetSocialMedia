@@ -106,12 +106,14 @@ public class PostController {
 	@PostMapping(value = "/posts/{id}/like", consumes = "application/json", produces = "application/json")
 	public Post likePost(@RequestBody Post likedPost) {
 		User loggedInUser = lc.getLoggedInUser();
-		//likedPost.
-		//likedPost
-		
-		
-		
-		return null;
+		if(loggedInUser.getId() == 0) {
+			return likedPost;
+		}
+		if(likedPost.getLikes().contains(loggedInUser)) {
+			return likedPost;
+		}
+		likedPost.addUserLike(loggedInUser);
+		return ps.updatePost(likedPost);
 	}
 	
 	/**
@@ -121,9 +123,12 @@ public class PostController {
 	 */
 	@DeleteMapping(value = "/posts/{id}/like", consumes = "application/json", produces = "application/json")
 	public Post unlikePost(@RequestBody Post likedPost) {
-		//creates the user with the given parameters 
-		
-		return null;
+		User loggedInUser = lc.getLoggedInUser();
+		if(loggedInUser.getId() == 0) {
+			return likedPost;
+		}
+		likedPost.removeUserLike(loggedInUser);
+		return ps.updatePost(likedPost);
 	}
 	
 	
