@@ -22,13 +22,21 @@ body {
 .pane-right{
     position:fixed;
     right:0;
-    top:0;
 }
 
 .pane-left{
     position:fixed;
     left:0;
+}
+
+.pane-top{
+    position: fixed;
     top:0;
+}
+
+.pane-bottom{
+    position: fixed;
+    bottom: 0;
 }
 
 .pane-scrollable{
@@ -83,8 +91,8 @@ body {
 }
 
 .image-icon-edit {
-    width:6%; 
-    height:6%; 
+    width:8%; 
+    height:8%; 
     padding-left: 2%;
 }
 
