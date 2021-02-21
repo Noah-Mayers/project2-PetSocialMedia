@@ -3,6 +3,7 @@ package dev.groupone.services;
 import java.io.File;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -21,14 +22,8 @@ public class ImageUploadService {
 	public static String bucketName = "proj2buck"; //Establishes name of our bucket
 	
 	
-	public static void main(String[] args) {
-		//Test for AWS
-		File a = new File("");
-		uploadFile(a);
-	}
 
-	public static boolean uploadFile(File f) {
-		
+	public boolean uploadFile(MultipartFile mpf, int imageId) {
 		try {
 			if (s3client == null) { //Verifies that s3client is null
 				//Credential check
@@ -44,12 +39,11 @@ public class ImageUploadService {
 				}
 				
 				//This places our object in a state where it can be uploaded with ease
-				PutObjectRequest por = new PutObjectRequest(bucketName, f.getName(), f);
+				//PutObjectRequest por = new PutObjectRequest(bucketName, f.getName(), f);
 
 				// File Upload
-				s3client.putObject(por);
+//				s3client.putObject(por);
 
-				return true;
 			} 
 			//If s3client already exists, it will execute the file upload here without having to establish credentials again
 			else {
@@ -57,15 +51,24 @@ public class ImageUploadService {
 					s3client.createBucket(bucketName);
 				}
 
-				PutObjectRequest por = new PutObjectRequest(bucketName, f.getName(), f);
+				//PutObjectRequest por = new PutObjectRequest(bucketName, f.getName(), f);
 
 				// File Upload
-				s3client.putObject(por);
 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		try {
+			//PutObjectRequest por = new PutObjectRequest()
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 		return false;
 	}
 	

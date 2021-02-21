@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import dev.groupone.beans.Image;
+import dev.groupone.beans.ImageUpload;
 import dev.groupone.beans.Pet;
 import dev.groupone.services.ImageService;
+import dev.groupone.services.ImageUploadService;
 
 @RestController
 public class ImageController {
@@ -22,6 +25,25 @@ public class ImageController {
 	
 	@Autowired
 	ImageService is;
+	
+	@Autowired
+	ImageUploadService uploadService;
+	
+	@PostMapping("/images")
+    public Image uploadFile(@RequestBody ImageUpload upload) {
+
+		MultipartFile mpf = upload.getFile();
+		
+		
+	
+	
+//        fileService.uploadFile(file);
+//
+//        redirectAttributes.addFlashAttribute("message",
+//            "You successfully uploaded " + file.getOriginalFilename() + "!");
+
+        return null;
+    }
 	
 	/**
 	 * gets all images in DB in a list
