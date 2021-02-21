@@ -50,23 +50,16 @@ public class Pet {
 	private List<User> followers;
 
 	
-	 @ManyToMany(fetch = FetchType.LAZY,
-	            cascade = {
-	                CascadeType.PERSIST,
-	                CascadeType.MERGE
-	            },
-	            mappedBy = "pets")
-	 private List<Post> posts;
-	
+//	 @ManyToMany(fetch = FetchType.LAZY,
+//	            cascade = {
+//	                CascadeType.PERSIST,
+//	                CascadeType.MERGE
+//	            },
+//	            mappedBy = "pets")
+//	 private List<Post> posts;
+//	
 	
 	 
-	 public void addToPost(Post p) {
-		 this.posts.add(p);
-	 }
-	 
-	 public void removeFromPost(Post p) {
-		 this.posts.remove(p);
-	 }
 	 
 	 
 	public Pet(int id, String name, String tag, String bio, Image profilePicture, User owner,

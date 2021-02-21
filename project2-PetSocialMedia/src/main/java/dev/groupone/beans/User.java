@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -36,6 +37,16 @@ public class User {
 	
 	
 	private String bio;
+	
+	
+//	@ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {
+//                CascadeType.PERSIST,
+//                CascadeType.MERGE
+//            },
+//            mappedBy = "pets")
+//	private List<Post> likedPosts;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "profile_picture")
@@ -111,14 +122,10 @@ public class User {
 		this.bio = bio;
 	}
 
-	public Image getProfile_picture() {
-		return profilePicture;
-	}
-
-	public void setProfile_picture(Image profilePicture) {
-		this.profilePicture = profilePicture;
-	}
 	
+	
+	
+
 	
 
 	

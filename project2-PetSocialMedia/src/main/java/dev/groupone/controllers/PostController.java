@@ -3,6 +3,7 @@ package dev.groupone.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.groupone.beans.Pet;
 import dev.groupone.beans.Post;
+import dev.groupone.beans.User;
 import dev.groupone.services.PetService;
 import dev.groupone.services.PostService;
 
@@ -54,9 +56,6 @@ public class PostController {
 		newPost.setPets(null);
 		Post postedPost = ps.addPost(newPost);
 		postedPost.setPets(attachedPets);
-		for(int i = 0; i < attachedPets.size(); i++) {
-			attachedPets.get(i).addToPost(postedPost);
-		}
 		ps.updatePost(postedPost);
 		return postedPost;
 	}
@@ -106,7 +105,11 @@ public class PostController {
 	 */
 	@PostMapping(value = "/posts/{id}/like", consumes = "application/json", produces = "application/json")
 	public Post likePost(@RequestBody Post likedPost) {
-		//creates the user with the given parameters 
+		User loggedInUser = lc.getLoggedInUser();
+		//likedPost.
+		//likedPost
+		
+		
 		
 		return null;
 	}
