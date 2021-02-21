@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.groupone.beans.Comment;
 import dev.groupone.beans.Pet;
 import dev.groupone.beans.Post;
 import dev.groupone.beans.User;
+import dev.groupone.services.CommentService;
 import dev.groupone.services.PetService;
 import dev.groupone.services.PostService;
 
@@ -31,6 +33,9 @@ public class PostController {
 	
 	@Autowired
 	private PostService ps;
+	
+	@Autowired
+	private CommentService cs;
 	
 	@Autowired
 	private PetService petService;
@@ -131,6 +136,23 @@ public class PostController {
 		return ps.updatePost(likedPost);
 	}
 	
+	/**
+	 * 
+	 * @param newComment
+	 * @return
+	 */
+	@PostMapping(value = "/posts/{id}/comment", consumes = "application/json", produces = "application/json")
+	public Comment addCommentToPost(@PathVariable("id") int id, @RequestBody Comment newComment) {
+		User loggedInUser = lc.getLoggedInUser();
+		if(loggedInUser.getId() == 0) {
+			newComment.setAuthor(loggedInUser);
+			return newComment;
+		}
+		newComment.setAuthor(loggedInUser);
+		Post commentedPost = ps.getPost(id);
+		newComment.setPost(commentedPost);
+		return cs.addComment(newComment);
+	}
 	
 	
 	

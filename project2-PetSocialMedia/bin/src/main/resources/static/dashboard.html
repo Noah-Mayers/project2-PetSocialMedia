@@ -6,9 +6,12 @@
     <title>My Feed</title>
     
     <link rel="stylesheet" type="text/css" href="puppr.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
-<body id="body">
+<body id="body" onload="sessInfo()">
 
     <div class="pane-narrow pane-left" style="background-color: white;">
         <div class="pane-left" style="margin-left: 3%; float:left">
@@ -27,18 +30,22 @@
                 </div><br><hr><br>
 
                 <div style="display:flex">
-                    <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button"><u>Pet 1</u></button>
+                    <label style="font-size: x-large; text-indent: 30%;"><b>Post:</b></label>
                 </div><br>
 
                 <div style="display:flex">
                     <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button"><u>Pet 2</u></button>
+                    <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 1')"><u>Pet 1</u></button>
                 </div><br>
 
                 <div style="display:flex">
                     <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button"><u>Pet 3</u></button>
+                    <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 2')"><u>Pet 2</u></button>
+                </div><br>
+
+                <div style="display:flex">
+                    <img src="avatar.png" class="image-avatar" style="width:10%">
+                    <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 3')"><u>Pet 3</u></button>
                 </div><br>
                 
             </div>
@@ -47,7 +54,7 @@
                     <img src="avatar.png" class="image-avatar" style="width:80%">
                 </div>
                 <div style="float: left; width:70%; position:absolute; left:35%; font-size: xx-large;">
-                    <label><b>User</b></label><br>
+                    <label id="sessUser"><b>User</b></label><br>
                     <label class="dash-button" style="margin-top: 1%; font-size: x-large;" onclick="logout()"><u>logout</u></label>
                 </div>
             </div>
@@ -82,53 +89,8 @@
         <br>
         <br>
         
-        <div class="pane-post">
-            <div style="font-size:xx-large;">
-                <img style="width:5%;" class="image-avatar" src="avatar.png">
-                <label> User</label>
-            </div>
-            <p style="font-size: large;">lorem ipsum dolor sit amet</p>
-            <hr>
-            <img class="image-post" src="test-post.png">
-            <hr>
-            <div style="display:flex; font-size: x-large;">
-                With: <label style="color:#FFB27F"> <u>Pet</u></label>
-                <div style="text-align: right; font-size: large;">
-                    <img src=logo-grey.png style="width:5%">
-                    <label> 0 </label>
-                    &emsp;
-                    <img src=comment.png style="width:5%">
-                    <label> 0 </label>
-                </div>
-            </div>
-        </div>
 
-        <br>
-        <br>
-        
-        <div class="pane-post">
-            <div style="font-size:xx-large;">
-                <img style="width:5%;" class="image-avatar" src="avatar.png">
-                <label> User</label>
-            </div>
-            <p style="font-size: large;">lorem ipsum dolor sit amet</p>
-            <hr>
-            <img class="image-post" src="test-post.png">
-            <hr>
-            <div style="display:flex; font-size: x-large;">
-                With: <label style="color:#FFB27F"> <u>Pet</u></label>
-                <div style="text-align: right; font-size: large;">
-                    <img src=logo-grey.png style="width:5%">
-                    <label> 0 </label>
-                    &emsp;
-                    <img src=comment.png style="width:5%">
-                    <label> 0 </label>
-                </div>
-            </div>
-        </div>
-
-        <br>
-        <br>
+        <div id="allPosts"></div>
     
     </div>
 
@@ -140,9 +102,47 @@
         <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
     </div>
 
+     <!-- Modal -->
+     <div class="modal fade" id="post-popup" role="dialog">
+        <div class="modal-dialog">
+            <div class="pane-modal">
+                <div class="modal-header">
+                    <h2 id="post-popup-header" class="modal-title">Make a Post</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-area" style="border: 1px solid black; font-size: medium;">
+                        <div style="display:flex">
+                            <input type="checkbox" name="pet" value="Pet1">
+                            <img src="avatar.png" class="image-avatar image-avatar-checkbox">
+                            <label>Pet 1</label>
+                        </div><br>
+                        <div style="display:flex">
+                            <input type="checkbox" name="pet" value="Pet1">
+                            <img src="avatar.png" class="image-avatar image-avatar-checkbox">
+                            <label>Pet 2</label>
+                        </div><br>
+                        <div style="display:flex">
+                            <input type="checkbox" name="pet" value="Pet1">
+                            <img src="avatar.png" class="image-avatar image-avatar-checkbox">
+                            <label>Pet 3</label>
+                        </div>
+                    </div><br>
+                    <textarea class="modal-area" placeholder="Add a caption!"></textarea>
+                    <button class="modal-button" style="width:93%; margin-bottom: 5px;">Upload</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="modal-button" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="modal-button" data-dismiss="modal" onclick="post()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
+<script src="homepage.js"></script>
 <script>
+   
 </script>
 
 </html>
