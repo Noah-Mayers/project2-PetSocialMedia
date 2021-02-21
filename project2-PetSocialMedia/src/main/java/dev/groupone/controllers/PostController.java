@@ -136,23 +136,6 @@ public class PostController {
 		return ps.updatePost(likedPost);
 	}
 	
-	/**
-	 * 
-	 * @param newComment
-	 * @return
-	 */
-	@PostMapping(value = "/posts/{id}/comment", consumes = "application/json", produces = "application/json")
-	public Comment addCommentToPost(@PathVariable("id") int id, @RequestBody Comment newComment) {
-		User loggedInUser = lc.getLoggedInUser();
-		if(loggedInUser.getId() == 0) {
-			newComment.setAuthor(loggedInUser);
-			return newComment;
-		}
-		newComment.setAuthor(loggedInUser);
-		Post commentedPost = ps.getPost(id);
-		newComment.setPost(commentedPost);
-		return cs.addComment(newComment);
-	}
 	
 	
 	
