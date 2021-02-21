@@ -109,16 +109,17 @@ public class PostController {
 	 * @return
 	 */
 	@PostMapping(value = "/posts/{id}/like", consumes = "application/json", produces = "application/json")
-	public Post likePost(@RequestBody Post likedPost) {
+	public Post likePost(@PathVariable("id") int id) {
+		Post postToLike = ps.getPost(id);
 		User loggedInUser = lc.getLoggedInUser();
 		if(loggedInUser.getId() == 0) {
-			return likedPost;
+			return postToLike;
 		}
-		if(likedPost.getLikes().contains(loggedInUser)) {
-			return likedPost;
+		if(postToLike.getLikes().contains(loggedInUser)) {
+			return postToLike;
 		}
-		likedPost.addUserLike(loggedInUser);
-		return ps.updatePost(likedPost);
+		postToLike.addUserLike(loggedInUser);
+		return ps.updatePost(postToLike);
 	}
 	
 	/**
