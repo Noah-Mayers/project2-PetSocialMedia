@@ -128,13 +128,14 @@ public class PostController {
 	 * @return
 	 */
 	@DeleteMapping(value = "/posts/{id}/like", consumes = "application/json", produces = "application/json")
-	public Post unlikePost(@RequestBody Post likedPost) {
+	public Post unlikePost(@PathVariable("id") int id) {
+		Post postToLike = ps.getPost(id);
 		User loggedInUser = lc.getLoggedInUser();
 		if(loggedInUser.getId() == 0) {
-			return likedPost;
+			return postToLike;
 		}
-		likedPost.removeUserLike(loggedInUser);
-		return ps.updatePost(likedPost);
+		postToLike.removeUserLike(loggedInUser);
+		return ps.updatePost(postToLike);
 	}
 	
 	
