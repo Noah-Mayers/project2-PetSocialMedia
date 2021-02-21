@@ -21,16 +21,16 @@
                 <br><br>
                 <div style="display:flex">
                     <img src="logo-icon.png" style="width:10%">
-                    <button class="dash-button"><u>Home</u></button>
+                    <button onclick="window.location.href='http://localhost:8080/dashboard.html'" class="dash-button"><u>Home</u></button>
                 </div><br>
 
                 <div style="display:flex">
                     <img src="logo-icon.png" style="width:10%">
-                    <button class="dash-button"><u>My Account</u></button>
+                    <button onclick="window.location.href='http://localhost:8080/account-settings.html'" class="dash-button"><u>My Account</u></button>
                 </div><br><hr><br>
 
                 <div style="display:flex">
-                    <label style="font-size: x-large; text-indent: 30%;"><b>Post:</b></label>
+                    <label style="font-size: x-large; text-indent: 30%;"><b>Pets:</b></label>
                 </div><br>
 
                 <div style="display:flex">
@@ -38,15 +38,7 @@
                     <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 1')"><u>Pet 1</u></button>
                 </div><br>
 
-                <div style="display:flex">
-                    <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 2')"><u>Pet 2</u></button>
-                </div><br>
-
-                <div style="display:flex">
-                    <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 3')"><u>Pet 3</u></button>
-                </div><br>
+                <div id="allthepets"></div>
                 
             </div>
             <div>

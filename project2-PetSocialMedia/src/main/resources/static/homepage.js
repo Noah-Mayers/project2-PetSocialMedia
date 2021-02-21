@@ -6,11 +6,40 @@ xhttp.onreadystatechange = function (){
         console.log(this.responseText);
         sessionuser = JSON.parse(this.responseText);
         document.getElementById("sessUser").innerHTML = sessionuser.username;
+        loadpets();
         loadposts();
     }
 }
 
 xhttp.open("GET", "http://localhost:8080/login", true);
+xhttp.send();
+}
+
+
+function loadpets(){
+    let xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function (){
+        if(this.readyState == 4 && this.status==200){
+            petinput = JSON.parse(xhttp.responseText);
+            leftpets = petinput;
+    
+            //The following will iterate through all posts
+            for (let i =0; i < petinput.length; i++){
+            let output = document.getElementById("allthepets");
+            let outputHtml = output.innerHTML;
+  
+            outputHtml +=  `<div style="display:flex">
+            <img src="avatar.png" class="image-avatar" style="width:10%">
+            <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 1')"><u>${petinput[i].name}</u></button>
+            </div><br>`;
+
+            output.innerHTML = outputHtml;    
+            }
+        }
+    }
+
+xhttp.open("GET", "http://localhost:8080/users/" + sessionuser.id + "/pets", true);
 xhttp.send();
 }
 
