@@ -52,16 +52,17 @@ xhttp.onreadystatechange = function (){
         posts = input;
 
         //The following will iterate through all posts
-        for (let i =0; i < input.length; i++){
+        for (let i =input.length; i > 0; i--){
             let output = document.getElementById("allPosts");
             let outputHtml = output.innerHTML;
             
             let pets = "";
-        for(let j = 0; j < input[i].pets.length ; j++){
-            pets += `${input[i].pets[j].name} `;
+        for(let j = 0; j < input[i-1].pets.length ; j++){
+            pets += `${input[i-1].pets[j].name} `;
         }
-        let postlike = "like" + input[i].id;
-        let counter = input[i].likes.length;
+        let postlike = "like" + input[i-1
+        ].id;
+        let counter = input[i-1].likes.length;
         //Actual Post 
         
         //Starts Post    
@@ -71,10 +72,10 @@ xhttp.onreadystatechange = function (){
         //Sets Poster Image
         outputHtml +=  `<img style="width:5%;" class="image-avatar" src="avatar.png">`;
         //Sets Poster Username
-        outputHtml += `<label>${input[i].author.username}</label>
+        outputHtml += `<label>${input[i-1].author.username}</label>
             </div>`;
         //Sets Caption of Post
-        outputHtml += `<p style="font-size: large;">${input[i].caption}</p>
+        outputHtml += `<p style="font-size: large;">${input[i-1].caption}</p>
             <hr>`;
         //Sets Post Picture
         outputHtml += `<img class="image-post" src="https://proj2buck.s3.amazonaws.com/1.jpg">
@@ -84,7 +85,7 @@ xhttp.onreadystatechange = function (){
                 With: <label style="color:#FFB27F"><u>${pets}</u></label>`
         //Sets Likes
         outputHtml += `<div style="text-align: right; font-size: large;">
-                    <img onclick="likeunlike(${input[i].id})" src=logo-grey.png style="width:5%">
+                    <img onclick="likeunlike(${input[i-1].id})" src=logo-grey.png style="width:5%">
                     <label id="${postlike}"> ${counter} </label>
                     &emsp;
                     <img src=comment.png style="width:5%">
@@ -98,6 +99,7 @@ xhttp.onreadystatechange = function (){
         
         output.innerHTML = outputHtml;
         }
+        
         //Will Load Dynamic Checkboxes for doing a Post
         petinput.length;
         for(let f = 0; f < petinput.length; f++){

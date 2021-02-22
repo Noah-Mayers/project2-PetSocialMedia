@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="puppr.css" />
 </head>
 
-<body id="body">
+<body id="body" onload="sessInfo()">
 
     <div class="pane-narrow pane-left" style="background-color: white;">
         <div class="pane-left" style="margin-left: 3%; float:left">
@@ -26,20 +26,7 @@
                     <button  onclick="window.location.href='http://localhost:8080/account-settings.html'" class="dash-button"><u>My Account</u></button>
                 </div><br><hr><br>
 
-                <div style="display:flex">
-                    <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button"><u>Pet 1</u></button>
-                </div><br>
-
-                <div style="display:flex">
-                    <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button"><u>Pet 2</u></button>
-                </div><br>
-
-                <div style="display:flex">
-                    <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button"><u>Pet 3</u></button>
-                </div><br>
+                <div id="allthepets"></div>
                 
             </div>
             <div>
@@ -47,7 +34,7 @@
                     <img src="avatar.png" class="image-avatar" style="width:80%">
                 </div>
                 <div style="float: left; width:70%; position:absolute; left:35%; font-size: xx-large;">
-                    <label><b>User</b></label><br>
+                    <label id="sessUser"><b>User</b></label><br>
                     <label class="dash-button" style="margin-top: 1%; font-size: x-large;" onclick="logout()"><u>logout</u></label>
                 </div>
             </div>
@@ -59,65 +46,11 @@
     <div class="pane-scrollable" style="position: absolute; height:100vh; left:25%; width:50%; background-color: #FFB27F;  border-left: 2px solid #af7a56;">
         
         <br><br>
-        <div class="pane-post" style="border-radius: 40px;">
-            <div style="display:flex">
-                <img class="image-avatar" src="avatar.png" style="width:25%;">
-                <div style="margin-left:5%;">
-                    <label style="font-size: xx-large;"> user@email.com </label> <br><br>
-                    <div style="display:flex">
-                       <input type="text" class="edit-bar" value="User" readonly>
-                       <img src="edit.png" class="image-icon-edit">
-                    </div><br>
-                    <div style="display:flex">
-                        <input type="password" class="edit-bar" value="password" readonly>
-                        <img src="edit.png" class="image-icon-edit">
-                     </div>
-                </div>
-            </div>
-        </div><br><Br>
+        <div id="sessUserEdit"></div>
 
-        <div class="pane-post" style="border-radius: 40px;">
-            <div style="display:flex">
-                <img class="image-avatar" src="avatar.png" style="width:17%;">
-                <div style="margin-left:5%;">
-                    <label style="font-size: xx-large;"> @Pet1 </label> <br><br>
-                    <div style="display:flex">
-                       <input type="text" class="edit-bar" value="Pet 1" readonly>
-                       <img src="edit.png" class="image-icon-edit">
-                    </div><br>
-                </div>
-            </div>
-        </div>
+        <!--This will display the pets and allow their names/images to be changed  -->
+     <div id="editthepets"></div>
 
-        <br><br>
-        <div class="pane-post" style="border-radius: 40px;">
-            <div style="display:flex">
-                <img class="image-avatar" src="avatar.png" style="width:17%;">
-                <div style="margin-left:5%;">
-                    <label style="font-size: xx-large;"> @Pet2 </label> <br><br>
-                    <div style="display:flex">
-                       <input type="text" class="edit-bar" value="Pet 2" readonly>
-                       <img src="edit.png" class="image-icon-edit">
-                    </div><br>
-                </div>
-            </div>
-        </div>
-
-        <br><br>
-        <div class="pane-post" style="border-radius: 40px;">
-            <div style="display:flex">
-                <img class="image-avatar" src="avatar.png" style="width:17%;">
-                <div style="margin-left:5%;">
-                    <label style="font-size: xx-large;"> @Pet3 </label> <br><br>
-                    <div style="display:flex">
-                       <input type="text" class="edit-bar" value="Pet 3" readonly>
-                       <img src="edit.png" class="image-icon-edit">
-                    </div><br>
-                </div>
-            </div>
-        </div>
-        
-        <br><br>
         <div class="pane-post" style="text-align: center;">
             <label style="font-size: xx-large;">Add New Pet</label>
         </div>
@@ -135,7 +68,7 @@
 
 </body>
 
-<script>
+<script src="account-setting.js">
 </script>
 
 </html>
