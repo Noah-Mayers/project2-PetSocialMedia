@@ -3,11 +3,13 @@ package dev.groupone.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import dev.groupone.beans.Comment;
 import dev.groupone.beans.Post;
 import dev.groupone.repositories.CommentRepo;
 
+@Service
 public class CommentServiceImpl implements CommentService{
 
 	@Autowired

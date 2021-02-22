@@ -7,8 +7,68 @@
     
     <link rel="stylesheet" type="text/css" href="puppr.css" />
 </head>
-<body id="body">
+
+<body id="body" onload="sessInfo()">
+
+    <div class="pane-narrow pane-left" style="background-color: white;">
+        <div class="pane-left" style="margin-left: 3%; float:left">
+            <div style="height:85vh">
+
+
+                <br><br>
+                <div style="display:flex">
+                    <img src="logo-icon.png" style="width:10%">
+                    <button onclick="window.location.href='http://localhost:8080/dashboard.html'" class="dash-button"><u>Home</u></button>
+                </div><br>
+
+                <div style="display:flex">
+                    <img src="logo-icon.png" style="width:10%">
+                    <button  onclick="window.location.href='http://localhost:8080/account-settings.html'" class="dash-button"><u>My Account</u></button>
+                </div><br><hr><br>
+
+                <div id="allthepets"></div>
+                
+            </div>
+            <div>
+                <div style="float:left; width:30%; height:10%;">
+                    <img src="avatar.png" class="image-avatar" style="width:80%">
+                </div>
+                <div style="float: left; width:70%; position:absolute; left:35%; font-size: xx-large;">
+                    <label id="sessUser"><b>User</b></label><br>
+                    <label class="dash-button" style="margin-top: 1%; font-size: x-large;" onclick="logout()"><u>logout</u></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="pane-scrollable" style="position: absolute; height:100vh; left:25%; width:50%; background-color: #FFB27F;  border-left: 2px solid #af7a56;">
+        
+        <br><br>
+        <div id="sessUserEdit"></div>
+
+        <!--This will display the pets and allow their names/images to be changed  -->
+     <div id="editthepets"></div>
+
+        <div class="pane-post" style="text-align: center;">
+            <label style="font-size: xx-large;">Add New Pet</label>
+        </div>
+        <br><br>
     
+    </div>
+
+
+
+    <div class="pane-narrow pane-right" style="align-content:center; height:100vh; background-color: white; border-left: 2px solid #af7a56; overflow:hidden;">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
+    </div>
 
 </body>
+
+<script src="account-setting.js">
+</script>
+
 </html>

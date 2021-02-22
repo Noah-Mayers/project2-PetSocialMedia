@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
+        rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <div class="form-group m-2">
+        <label for="fileupload">Attachment related To event(does not work in beta)</label>
+        <input id="fileupload" class="form-control-file" type="file" name="fileupload" /> 
+    </div>
+
+
+
+
+    <div class="form-group m-2">
+        <button type="button" class="btn btn-primary btn-lg ms-5" onclick="submitDocument()">Submit Request</button>
+    </div>
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+    </script>
+    <script>
+
+
+        function submitDocument(){
+            let fileInput = document.getElementById("fileupload");
+            let fileValue = fileInput.value;
+            let inputFiles = fileInput.files;
+            console.log(fileValue);
+            console.log(inputFiles);
+            let formData = new FormData();
+            formData.append("file", fileupload.files[0]);
+			let xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if(this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+
+				}
+			}	
+			xhttp.open("Post", "http://localhost:8080/images", true);
+            //xhttp.setRequestHeader("Content-Type", "multipart/form-data");
+            xhttp.send(formData);
+        }
+
+
+
+
+    </script>
+</body>
+</html>

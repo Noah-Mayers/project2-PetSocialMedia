@@ -38,17 +38,39 @@ public class Post {
 	@JoinColumn(name = "author", nullable = false)
 	private User author;
 	
-	@ManyToMany(fetch =  FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch =  FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST})
 	@JoinTable(name = "pets_tagged_in_posts", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "pet_id"))
 	private List<Pet> pets;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinTable(name = "post_likes", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> likes;
 	
 	private java.sql.Timestamp posted;
 
 	
+	
+	public void addUserLike(User user) {
+		this.likes.add(user);
+	}
+	
+	public void removeUserLike(User user) {
+		for(int i = likes.size()-1; i > -1; i--) {
+			User like = likes.get(i);
+			if(like.getId() == user.getId()) {
+				likes.remove(i);
+			}
+		}
+	}
+	
+	
+	public void tagPetToPost(Pet pet) {
+		this.pets.add(pet);
+	}
+	
+	public void untaggPetToPost(Pet pet) {
+		this.pets.remove(pet);
+	}
 	
 	
 	public Post() {

@@ -6,6 +6,9 @@
     <title>My Feed</title>
     
     <link rel="stylesheet" type="text/css" href="puppr.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body id="body" onload="sessInfo()">
@@ -16,30 +19,22 @@
 
 
                 <br><br>
+                <!-- Home Button will Refresh the page -->
                 <div style="display:flex">
                     <img src="logo-icon.png" style="width:10%">
-                    <button class="dash-button"><u>Home</u></button>
+                    <button onclick="window.location.href='http://localhost:8080/dashboard.html'" class="dash-button"><u>Home</u></button>
                 </div><br>
-
+                <!-- Account button will take one to settings -->
                 <div style="display:flex">
                     <img src="logo-icon.png" style="width:10%">
-                    <button class="dash-button"><u>My Account</u></button>
+                    <button onclick="window.location.href='http://localhost:8080/account-settings.html'" class="dash-button"><u>My Account</u></button>
                 </div><br><hr><br>
-
+                <!-- Will Display Pets -->
                 <div style="display:flex">
-                    <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button"><u>Pet 1</u></button>
+                    <label style="font-size: x-large; text-indent: 30%;"><b>Pets:</b></label>
                 </div><br>
-
-                <div style="display:flex">
-                    <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button"><u>Pet 2</u></button>
-                </div><br>
-
-                <div style="display:flex">
-                    <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button"><u>Pet 3</u></button>
-                </div><br>
+                <!-- Dynamically displays pets -->
+                <div id="allthepets"></div>
                 
             </div>
             <div>
@@ -54,81 +49,9 @@
         </div>
     </div>
 
-
-
     <div class="pane-scrollable" style="position: absolute; left:25%; width:50%; background-color: #FFB27F;  border-left: 2px solid #af7a56">
-        
-        <div class="pane-post">
-            <div style="font-size:xx-large;">
-                <img style="width:5%;" class="image-avatar" src="avatar.png">
-                <label> User</label>
-            </div>
-            <p style="font-size: large;">Seamus sleeping on a pillow.</p>
-            <hr>
-            <img class="image-post" src="test-post.png">
-            <hr>
-            <div style="display:flex; font-size: x-large;">
-                With: <label style="color:#FFB27F"> <u>Seamus</u></label>
-                <div style="text-align: right; font-size: large;">
-                    <img src=logo-grey.png style="width:5%">
-                    <label> 0 </label>
-                    &emsp;
-                    <img src=comment.png style="width:5%">
-                    <label> 0 </label>
-                </div>
-            </div>
-        </div>
-
-        <br>
-        <br>
-        
-        <div class="pane-post">
-            <div style="font-size:xx-large;">
-                <img style="width:5%;" class="image-avatar" src="avatar.png">
-                <label> User</label>
-            </div>
-            <p style="font-size: large;">lorem ipsum dolor sit amet</p>
-            <hr>
-            <img class="image-post" src="test-post.png">
-            <hr>
-            <div style="display:flex; font-size: x-large;">
-                With: <label style="color:#FFB27F"> <u>Pet</u></label>
-                <div style="text-align: right; font-size: large;">
-                    <img src=logo-grey.png style="width:5%">
-                    <label> 0 </label>
-                    &emsp;
-                    <img src=comment.png style="width:5%">
-                    <label> 0 </label>
-                </div>
-            </div>
-        </div>
-
-        <br>
-        <br>
-        
-        <div class="pane-post">
-            <div style="font-size:xx-large;">
-                <img style="width:5%;" class="image-avatar" src="avatar.png">
-                <label> User</label>
-            </div>
-            <p style="font-size: large;">lorem ipsum dolor sit amet</p>
-            <hr>
-            <img class="image-post" src="test-post.png">
-            <hr>
-            <div style="display:flex; font-size: x-large;">
-                With: <label style="color:#FFB27F"> <u>Pet</u></label>
-                <div style="text-align: right; font-size: large;">
-                    <img src=logo-grey.png style="width:5%">
-                    <label> 0 </label>
-                    &emsp;
-                    <img src=comment.png style="width:5%">
-                    <label> 0 </label>
-                </div>
-            </div>
-        </div>
-
-        <br>
-        <br>
+        <!-- Brings in all Posts -->
+        <div id="allPosts"></div>
     
     </div>
 
@@ -138,6 +61,31 @@
         <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
         <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
         <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
+    </div>
+
+     <!-- Modal -->
+     <div class="modal fade" id="post-popup" role="dialog">
+        <div class="modal-dialog">
+            <div class="pane-modal">
+                <div class="modal-header">
+                    <h2 id="post-popup-header" class="modal-title">Make a Post</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-area" style="border: 1px solid black; font-size: medium;">
+                        <!-- This will display the pets selection dynamically -->
+                         <div id="petselection"></div>
+                         
+                    </div><br>
+                    <!-- Gets the caption text -->
+                    <textarea class="modal-area" id="usercaption" placeholder="Add a caption!"></textarea>
+                    <button class="modal-button" style="width:93%; margin-bottom: 5px;">Upload</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="modal-button" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="modal-button" data-dismiss="modal" onclick="post()">Submit</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

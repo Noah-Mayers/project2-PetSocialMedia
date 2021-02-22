@@ -1,8 +1,10 @@
 package dev.groupone.services;
 
 import java.io.File;
+import java.io.InputStream;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -10,63 +12,56 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectResult;
+
+import dev.groupone.beans.Image;
 
 /*
  * The following class uploads images to an AWS S3
  */
 @Service
 public class ImageUploadService {
-	private static AmazonS3 s3client = null;
-	public static String bucketName = "proj2buck"; //Establishes name of our bucket
+	private  AmazonS3 s3client = null;
+	private  String bucketName = "proj2buck"; //Establishes name of our bucket
+	private AWSCredentials credentials;
 	
 	
-	public static void main(String[] args) {
-		//Test for AWS
-		File a = new File("");
-		uploadFile(a);
-	}
-
-	public static boolean uploadFile(File f) {
-		
+	public String uploadFileToBucket(MultipartFile mpf, int imageId) {
+		initBucket();
+		ObjectMetadata metadata=new ObjectMetadata();
 		try {
-			if (s3client == null) { //Verifies that s3client is null
-				//Credential check
-				AWSCredentials credentials = new BasicAWSCredentials("", "");
-				
-				//Our actual client is established here, checks for credentials
-				AmazonS3 s3client = AmazonS3ClientBuilder.standard()
+			InputStream input = mpf.getInputStream();
+			metadata.setContentLength(input.available());
+			metadata.setContentType(mpf.getContentType());
+			PutObjectRequest putRequest = new PutObjectRequest(bucketName, Integer.toString(imageId), input, metadata);
+			PutObjectResult por = s3client.putObject(putRequest);
+			//System.out.println(por);
+			//System.out.println(por.getMetadata().
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return "https://proj2buck.s3.amazonaws.com/" + imageId;
+		
+	}
+	
+	private void initBucket(){
+			if(this.s3client == null) {
+				this.credentials = new BasicAWSCredentials("accesskey", "secretaccesskey");
+				this.s3client = AmazonS3ClientBuilder.standard()
 						.withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(Regions.US_EAST_1)
 						.build();
-
-				if (!s3client.doesBucketExistV2(bucketName)) {
-					s3client.createBucket(bucketName);
-				}
-				
-				//This places our object in a state where it can be uploaded with ease
-				PutObjectRequest por = new PutObjectRequest(bucketName, f.getName(), f);
-
-				// File Upload
-				s3client.putObject(por);
-
-				return true;
 			} 
-			//If s3client already exists, it will execute the file upload here without having to establish credentials again
-			else {
-				if (!s3client.doesBucketExistV2(bucketName)) {
+			if (!s3client.doesBucketExistV2(bucketName)) {
 					s3client.createBucket(bucketName);
-				}
-
-				PutObjectRequest por = new PutObjectRequest(bucketName, f.getName(), f);
-
-				// File Upload
-				s3client.putObject(por);
-
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
 	}
+	
+	
+	
+
 	
 }

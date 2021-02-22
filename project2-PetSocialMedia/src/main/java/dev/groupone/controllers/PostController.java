@@ -1,6 +1,8 @@
 package dev.groupone.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -13,7 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.groupone.beans.Comment;
+import dev.groupone.beans.Pet;
 import dev.groupone.beans.Post;
+import dev.groupone.beans.User;
+import dev.groupone.services.CommentService;
+import dev.groupone.services.PetService;
 import dev.groupone.services.PostService;
 
 
@@ -25,7 +32,13 @@ public class PostController {
 	LoginController lc;
 	
 	@Autowired
-	PostService ps;
+	private PostService ps;
+	
+	@Autowired
+	private CommentService cs;
+	
+	@Autowired
+	private PetService petService;
 	
 	
 	/**
@@ -44,9 +57,12 @@ public class PostController {
 	 */
 	@PostMapping(value = "/posts", consumes = "application/json", produces = "application/json")
 	public Post createPost(@RequestBody Post newPost) {
-		//creates the user with the given parameters 
-		
-		return ps.addPost(newPost);
+		List<Pet> attachedPets = newPost.getPets();
+		newPost.setPets(null);
+		Post postedPost = ps.addPost(newPost);
+		postedPost.setPets(attachedPets);
+		ps.updatePost(postedPost);
+		return postedPost;
 	}
 	
 	
@@ -93,10 +109,17 @@ public class PostController {
 	 * @return
 	 */
 	@PostMapping(value = "/posts/{id}/like", consumes = "application/json", produces = "application/json")
-	public Post likePost(@RequestBody Post likedPost) {
-		//creates the user with the given parameters 
-		
-		return null;
+	public Post likePost(@PathVariable("id") int id) {
+		Post postToLike = ps.getPost(id);
+		User loggedInUser = lc.getLoggedInUser();
+		if(loggedInUser.getId() == 0) {
+			return postToLike;
+		}
+		if(postToLike.getLikes().contains(loggedInUser)) {
+			return postToLike;
+		}
+		postToLike.addUserLike(loggedInUser);
+		return ps.updatePost(postToLike);
 	}
 	
 	/**
@@ -105,10 +128,14 @@ public class PostController {
 	 * @return
 	 */
 	@DeleteMapping(value = "/posts/{id}/like", consumes = "application/json", produces = "application/json")
-	public Post unlikePost(@RequestBody Post likedPost) {
-		//creates the user with the given parameters 
-		
-		return null;
+	public Post unlikePost(@PathVariable("id") int id) {
+		Post postToLike = ps.getPost(id);
+		User loggedInUser = lc.getLoggedInUser();
+		if(loggedInUser.getId() == 0) {
+			return postToLike;
+		}
+		postToLike.removeUserLike(loggedInUser);
+		return ps.updatePost(postToLike);
 	}
 	
 	
