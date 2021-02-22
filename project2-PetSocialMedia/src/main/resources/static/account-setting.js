@@ -41,7 +41,7 @@ function sessInfo() {
                 <div style="margin-left:5%;">
                     <label style="font-size: xx-large;"> ${sessionuser.email}</label> <br><br>
                     <div style="display:flex">
-                       <input type="text" class="edit-bar" value="${sessionuser.name}">
+                       <input type="text" class="edit-bar" value="${sessionuser.username}">
                        <img src="edit.png" class="image-icon-edit">
                     </div><br>
                     <div style="display:flex">
