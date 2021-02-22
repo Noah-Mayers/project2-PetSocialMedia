@@ -55,7 +55,12 @@ public class Post {
 	}
 	
 	public void removeUserLike(User user) {
-		this.likes.remove(user);
+		for(int i = likes.size()-1; i > -1; i--) {
+			User like = likes.get(i);
+			if(like.getId() == user.getId()) {
+				likes.remove(i);
+			}
+		}
 	}
 	
 	
