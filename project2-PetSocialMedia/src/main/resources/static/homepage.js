@@ -193,6 +193,8 @@ function unlike(x){
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
          console.log("Unliking the post...");
+         let post = JSON.parse(this.responseText);
+         document.getElementById("like"+post.id).innerHTML = post.likes.length;
         }
       }
     
