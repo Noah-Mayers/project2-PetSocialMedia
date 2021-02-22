@@ -19,34 +19,22 @@
 
 
                 <br><br>
+                <!-- Home Button will Refresh the page -->
                 <div style="display:flex">
                     <img src="logo-icon.png" style="width:10%">
-                    <button class="dash-button"><u>Home</u></button>
+                    <button onclick="window.location.href='http://localhost:8080/dashboard.html'" class="dash-button"><u>Home</u></button>
                 </div><br>
-
+                <!-- Account button will take one to settings -->
                 <div style="display:flex">
                     <img src="logo-icon.png" style="width:10%">
-                    <button class="dash-button"><u>My Account</u></button>
+                    <button onclick="window.location.href='http://localhost:8080/account-settings.html'" class="dash-button"><u>My Account</u></button>
                 </div><br><hr><br>
-
+                <!-- Will Display Pets -->
                 <div style="display:flex">
-                    <label style="font-size: x-large; text-indent: 30%;"><b>Post:</b></label>
+                    <label style="font-size: x-large; text-indent: 30%;"><b>Pets:</b></label>
                 </div><br>
-
-                <div style="display:flex">
-                    <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 1')"><u>Pet 1</u></button>
-                </div><br>
-
-                <div style="display:flex">
-                    <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 2')"><u>Pet 2</u></button>
-                </div><br>
-
-                <div style="display:flex">
-                    <img src="avatar.png" class="image-avatar" style="width:10%">
-                    <button class="dash-button" data-toggle="modal" data-target="#post-popup" onclick="doPost('Pet 3')"><u>Pet 3</u></button>
-                </div><br>
+                <!-- Dynamically displays pets -->
+                <div id="allthepets"></div>
                 
             </div>
             <div>
@@ -61,35 +49,8 @@
         </div>
     </div>
 
-
-
     <div class="pane-scrollable" style="position: absolute; left:25%; width:50%; background-color: #FFB27F;  border-left: 2px solid #af7a56">
-        
-        <div class="pane-post">
-            <div style="font-size:xx-large;">
-                <img style="width:5%;" class="image-avatar" src="avatar.png">
-                <label> User</label>
-            </div>
-            <p style="font-size: large;">Seamus sleeping on a pillow.</p>
-            <hr>
-            <img class="image-post" src="test-post.png">
-            <hr>
-            <div style="display:flex; font-size: x-large;">
-                With: <label style="color:#FFB27F"> <u>Seamus</u></label>
-                <div style="text-align: right; font-size: large;">
-                    <img src=logo-grey.png style="width:5%">
-                    <label> 0 </label>
-                    &emsp;
-                    <img src=comment.png style="width:5%">
-                    <label> 0 </label>
-                </div>
-            </div>
-        </div>
-
-        <br>
-        <br>
-        
-
+        <!-- Brings in all Posts -->
         <div id="allPosts"></div>
     
     </div>
@@ -111,23 +72,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="modal-area" style="border: 1px solid black; font-size: medium;">
-                        <div style="display:flex">
-                            <input type="checkbox" name="pet" value="Pet1">
-                            <img src="avatar.png" class="image-avatar image-avatar-checkbox">
-                            <label>Pet 1</label>
-                        </div><br>
-                        <div style="display:flex">
-                            <input type="checkbox" name="pet" value="Pet1">
-                            <img src="avatar.png" class="image-avatar image-avatar-checkbox">
-                            <label>Pet 2</label>
-                        </div><br>
-                        <div style="display:flex">
-                            <input type="checkbox" name="pet" value="Pet1">
-                            <img src="avatar.png" class="image-avatar image-avatar-checkbox">
-                            <label>Pet 3</label>
-                        </div>
+                        <!-- This will display the pets selection dynamically -->
+                         <div id="petselection"></div>
+                         
                     </div><br>
-                    <textarea class="modal-area" placeholder="Add a caption!"></textarea>
+                    <!-- Gets the caption text -->
+                    <textarea class="modal-area" id="usercaption" placeholder="Add a caption!"></textarea>
                     <button class="modal-button" style="width:93%; margin-bottom: 5px;">Upload</button>
                 </div>
                 <div class="modal-footer">
