@@ -31,10 +31,14 @@ public class LoginController {
 	@GetMapping(value = "/login", produces = "application/json")
 	public User getLogin() {
 		if(this.loggedInUser == null) {
-			this.loggedInUser = new User();
-			this.loggedInUser.setId(0);
-		}
-		return this.loggedInUser;
+            this.loggedInUser = new User();
+            this.loggedInUser.setId(0);
+        }
+        if(this.loggedInUser.getId() == 0) {
+            return this.loggedInUser;
+        }
+        this.loggedInUser = us.getUser(this.loggedInUser.getId());
+        return this.loggedInUser;
 	}
 	
 	
@@ -88,10 +92,12 @@ public class LoginController {
 	
 	public User getLoggedInUser() {
 		if(this.loggedInUser == null) {
-			this.loggedInUser = new User();
-			this.loggedInUser.setId(0);
-		}
-		return this.loggedInUser;
+            this.loggedInUser = new User();
+            this.loggedInUser.setId(0);
+            return this.loggedInUser;
+        }
+        this.loggedInUser = us.getUser(this.loggedInUser.getId());
+        return this.loggedInUser;
 	}
 
 }
