@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.google.gson.Gson;
 
 import dev.groupone.beans.Post;
+import dev.groupone.beans.User;
 import dev.groupone.services.PostService;
 
 @AutoConfigureMockMvc
@@ -48,7 +49,8 @@ public class PostControllerTests {
 	
 	@Test
 	public void createPost() throws Exception {
-		Post testPost = new Post();
+		User testUser = new User(-9, "test@test.com", "test", "testpass", "testbio", null);
+		Post testPost = new Post(testUser);
 		Mockito.when(ps.addPost(testPost)).thenReturn(testPost);
 		mvc.perform(post("/posts").contentType(MediaType.APPLICATION_JSON).content(gson.toJson(testPost))).andExpect(status().isOk());
 	}
