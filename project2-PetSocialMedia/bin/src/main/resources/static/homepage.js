@@ -293,27 +293,220 @@ function post(){
             }
         
             let xhttp2 = new XMLHttpRequest();
-                xhttp2.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        let newpost = JSON.parse(this.responseText);
-                        console.log(newpost);
-                        }
+            xhttp2.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let newpost = JSON.parse(this.responseText);
+                    console.log(newpost);
                 }
-                xhttp2.open("POST", "http://localhost:8080/posts", true);
-                xhttp2.setRequestHeader('Content-Type', 'application/json');
-                xhttp2.send(JSON.stringify(post));
-
-
-
-
-
-
-
-
-        }	}
+            }
+            xhttp2.open("POST", "http://localhost:8080/posts", true);
+            xhttp2.setRequestHeader('Content-Type', 'application/json');
+            xhttp2.send(JSON.stringify(post));
+        }	
+    }
     xhttp.open("Post", "http://localhost:8080/images", true);
     //xhttp.setRequestHeader("Content-Type", "multipart/form-data");
     xhttp.send(formData);
+}
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Comments code
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Getting comments and GUI code:
+
+
+/////////////////////////////////////////////////////////
+//Functions called when users clicks buttons (comment, close comments, and post comment So far)
+/*
+*function activated when the comment button on a post is clicked
+*/
+function showCommentButtonClicked(clickedPost){
+    comments = getCommentsForPost(clickedPost.id);
+    clearCommentGUIList();
+    setUpCommentSectionHeader(clickedPost.author);
+    setUpCommentSectionBody(comments);
+    makeCommentSectionVisible();
+}
+
+/*
+*function activated when the close button inside of the comment section is clicked
+*/
+function closeCommentSection(){
+    clearCommentGUIList();
+    let entireCommentSection = document.getElementById("commentsSection");
+    entireCommentSection.style.visibility='hidden';
+}
+
+/////////////////////////////////////////////////////////
+//AJax calls for getting comments and GUI
+
+//AJAX call to get the list of comments for a post
+function getCommentsForPost(postId){
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("Recieved comment List...");
+            console.log(this.response);
+            let comments = JSON.parse(this.responseText);
+            console.log(comments);
+            return comments;
+        }
+        else{
+            return null;
+        }
+    }
+    xhttp.open("GET", "http://localhost:8080/comments/post/" + postId, true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send();
+}
+
+
+/////////////////////////////////////////////////////////
+// Functions that effect entire comment section (make visible and clear the list)
+
+
+//Empties the div that will hold the list of comments
+function clearCommentGUIList(){
+    let commentBodyDiv = document.getElementById("whereToAddComments");
+    commentBodyDiv.innerHTML = "";
+}
+
+//makes the whole comment section visible
+function makeCommentSectionVisible(){
+    let entireCommentSection = document.getElementById("commentsSection");
+    entireCommentSection.style.visibility='visible';
+}
+
+
+
+/////////////////////////////////////////////////////////
+// GUI constructor functions 
+
+//Makes header that indicates the author of post 
+function setUpCommentSectionHeader(authorOfPost){
+    let usernameLable = document.getElementById("authorOfSelectedPost");
+    usernameLable.innerHTML = authorOfPost.username;
+    let closeButtom = document.getElementById("closeCommentsButton");
+    closeButtom.addEventListener("click", closeCommentSection());
+}
+
+
+
+//Adds the comments to where comments are shown using the rest of the functions in the section
+function setUpCommentSectionBody(listOfComments){
+   let commentBodyDiv = document.getElementById("whereToAddComments");
+   if(Array.isArray(listOfComments)){
+        for (let i =listOfComments.length; i > 0; i--){
+            commentBodyDiv.appendChild(makeSingularCommentDivFor[i]);
+            let br = document.createElement('<br />');
+            commentBodyDiv.appendChild(br);
+        }
+   }
+   else {
+    commentBodyDiv.innerHTML = "";
+   }
+}
+
+
+function makeSingularCommentDivFor(CommentToInject){
+    let outterMostPaneDiv = document.createElement("div");
+    outterMostPaneDiv.className = "pane-comment";
+    
+    
+    let commentHead = makeSingularCommentHeaderDiv(CommentToInject.author);
+    let commentBody = makeSingularCommentBodyDiv(CommentToInject);
+
+    outterMostPaneDiv.appendChild(commentHead);
+    outterMostPaneDiv.appendChild(commentBody);
+    return outterMostPaneDiv;
+}
+
+
+function makeSingularCommentHeaderDiv(authorOfClient){
+    let innerCommentHeaderDiv = document.createElement("div");
+    innerCommentHeaderDiv.className = "pane-comment-header";
+
+    let commentAuthorImg = document.createElement("IMG");
+    commentAuthorImg.className = "image-avatar";
+    commentAuthorImg.style.width = "width:6%";
+    commentAuthorImg.src = getCommentAuthorImage(authorOfClient);
+
+    let commentHeaderLabel = document.createElement("LABEL");
+    commentHeaderLabel.style.textIndent = "10%";
+    commentHeaderLabel.innerHTML = authorOfClient.username;
+
+    innerCommentHeaderDiv.appendChild(commentAuthorImg);
+    innerCommentHeaderDiv.appendChild(commentHeaderLabel);
+    return innerCommentHeaderDiv;
 
 }
+
+function makeSingularCommentBodyDiv(commentToInject){
+    let innerCommentBodyDiv = document.createElement("div");
+    innerCommentBodyDiv.className = "pane-comment-body";
+
+    let commentBodyLabel = document.createElement("LABEL");
+    commentBodyLabel.style.verticalAlign = "center";
+    commentBodyLabel.innerHTML = commentToInject.body;
+
+    innerCommentBodyDiv.appendChild(commentBodyLabel);
+    return innerCommentBodyDiv;
+}
+
+function getCommentAuthorImage(commentAuthor){
+    if(commentAuthor.profilePicture == undefined ||commentAuthor.profilePicture == null){
+        return "avatar.png";
+    }
+    return commentAuthor.profilePicture.url;
+}
+
+
+
+
+
+//////////////////////////////////////////////////////////
+//Posting Comments code
+/*
+*Active when user clicks the button to submit the comment. 
+*/
+function submitComment(){
+
+}
+
+
+function saveCommentToServer(comment){
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("comment posted sucessfully...\nRecieving comment from Server");
+            console.log(this.response);
+            let returnedComment = JSON.parse(this.responseText);
+            console.log(returnedComment);
+            return returnedComment;
+        }
+        else{
+            return null;
+        }
+    }
+    xhttp.open("POST", "http://localhost:8080/comments" + postId, true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(JSON.stringify(comment));
+}
+
+function makeCommentObjectForSending(postObject, bodyOfComment){
+    let commentObject = {
+        post:postObject,
+        body:bodyOfComment
+    };
+    return commentObject;
+}
+
+
+
+
+
+
+
+
+
