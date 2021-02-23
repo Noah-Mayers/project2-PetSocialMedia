@@ -22,13 +22,21 @@ body {
 .pane-right{
     position:fixed;
     right:0;
-    top:0;
 }
 
 .pane-left{
     position:fixed;
     left:0;
+}
+
+.pane-top{
+    position: fixed;
     top:0;
+}
+
+.pane-bottom{
+    position: fixed;
+    bottom: 0;
 }
 
 .pane-scrollable{
@@ -47,7 +55,27 @@ body {
     padding: 3%;
     background-color: white;
     border-radius: 40px;
-    width: 80%;
+    width: 85%;
+}
+
+.pane-comment{
+    margin-left: 2%;
+    
+    padding: 3%;
+    padding-top: 4%;
+    background-color: white;
+    border-radius: 20px;
+    width: 95%;
+}
+
+.pane-comment-header{
+    display:span; 
+    border-bottom: 1px solid #DDD;
+}
+
+.pane-comment-body{
+    padding-top:3%;
+    vertical-align: center;
 }
 
 .pane-modal{
@@ -83,13 +111,26 @@ body {
 }
 
 .image-icon-edit {
-    width:6%; 
-    height:6%; 
+    width:8%; 
+    height:8%; 
     padding-left: 2%;
 }
 
 .login-bar {
     margin-top: 5%;
+    margin-left: 5%;
+
+    width: 90%;
+    height: 5%;
+    background-color: white;
+    border-width: 10%;
+    border-radius: 10px;
+
+    font-size: xx-large;
+}
+
+.modal-bar {
+    margin-top: 3%;
     margin-left: 5%;
 
     width: 90%;

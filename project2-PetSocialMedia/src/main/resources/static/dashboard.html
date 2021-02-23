@@ -39,7 +39,7 @@
             </div>
             <div>
                 <div style="float:left; width:30%; height:10%;">
-                    <img src="avatar.png" class="image-avatar" style="width:80%">
+                    <div id="userdefault"></div>
                 </div>
                 <div style="float: left; width:70%; position:absolute; left:35%; font-size: xx-large;">
                     <label id="sessUser"><b>User</b></label><br>
@@ -201,7 +201,10 @@
                     </div><br>
                     <!-- Gets the caption text -->
                     <textarea class="modal-area" id="usercaption" placeholder="Add a caption!"></textarea>
-                    <button class="modal-button" style="width:93%; margin-bottom: 5px;">Upload</button>
+                    <div class="form-group m-2">
+                        <label for="fileupload">Add A Puppr Picture!</label>
+                        <input id="fileupload" class="form-control-file" type="file" name="fileupload" /> 
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="modal-button" data-dismiss="modal">Cancel</button>
