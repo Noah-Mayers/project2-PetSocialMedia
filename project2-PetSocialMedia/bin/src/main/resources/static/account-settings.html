@@ -6,6 +6,9 @@
     <title>Account Settings</title>
     
     <link rel="stylesheet" type="text/css" href="puppr.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body id="body" onload="sessInfo()">
@@ -25,13 +28,13 @@
                     <img src="logo-icon.png" style="width:10%">
                     <button  onclick="window.location.href='http://localhost:8080/account-settings.html'" class="dash-button"><u>My Account</u></button>
                 </div><br><hr><br>
-
+                <!-- Loads the pets on the Left Panel -->
                 <div id="allthepets"></div>
                 
             </div>
             <div>
                 <div style="float:left; width:30%; height:10%;">
-                    <img src="avatar.png" class="image-avatar" style="width:80%">
+                    <div id="userdefault"></div>
                 </div>
                 <div style="float: left; width:70%; position:absolute; left:35%; font-size: xx-large;">
                     <label id="sessUser"><b>User</b></label><br>
@@ -46,12 +49,13 @@
     <div class="pane-scrollable" style="position: absolute; height:100vh; left:25%; width:50%; background-color: #FFB27F;  border-left: 2px solid #af7a56;">
         
         <br><br>
+        <!-- Adds the user editing section -->
         <div id="sessUserEdit"></div>
 
         <!--This will display the pets and allow their names/images to be changed  -->
      <div id="editthepets"></div>
 
-        <div class="pane-post" style="text-align: center;">
+        <div class="pane-post" data-toggle="modal" data-target="#pet-popup" style="text-align: center;">
             <label style="font-size: xx-large;">Add New Pet</label>
         </div>
         <br><br>
@@ -61,9 +65,37 @@
 
 
     <div class="pane-narrow pane-right" style="align-content:center; height:100vh; background-color: white; border-left: 2px solid #af7a56; overflow:hidden;">
-        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
-        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
-        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:10%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:13%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:13%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:13%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:13%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:13%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:13%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:13%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:13%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:13%">
+        <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:13%">
+    </div>
+
+
+
+    <div class="modal fade" id="pet-popup" role="dialog">
+        <div class="modal-dialog">
+            <div class="pane-modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">Add Your Pet</h2>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                    <label style="color:red; visibility: visible;">Tag Already in Use</label>
+                    <input class="modal-bar" id="newpettag" type="text" placeholder="unique tag" style="margin-top: 0%;"><br>
+                    <input class="modal-bar" id="newpetname" type="text" placeholder="display name">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="modal-button" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="modal-button" data-dismiss="modal" onclick="addPet()">Create</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

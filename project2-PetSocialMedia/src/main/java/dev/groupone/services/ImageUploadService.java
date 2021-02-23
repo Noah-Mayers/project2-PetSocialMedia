@@ -26,6 +26,8 @@ public class ImageUploadService {
 	private  AmazonS3 s3client = null;
 	private  String bucketName = "proj2buck"; //Establishes name of our bucket
 	private AWSCredentials credentials;
+	private String accessKey = "";
+	private String secretAccesskey = "";
 	
 	
 	public String uploadFileToBucket(MultipartFile mpf, int imageId) {
@@ -50,7 +52,7 @@ public class ImageUploadService {
 	
 	private void initBucket(){
 			if(this.s3client == null) {
-				this.credentials = new BasicAWSCredentials("", "");
+				this.credentials = new BasicAWSCredentials(this.accessKey, this.secretAccesskey);
 				this.s3client = AmazonS3ClientBuilder.standard()
 						.withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(Regions.US_EAST_1)
 						.build();
