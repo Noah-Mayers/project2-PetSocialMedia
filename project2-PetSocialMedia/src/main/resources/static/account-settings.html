@@ -28,13 +28,13 @@
                     <img src="logo-icon.png" style="width:10%">
                     <button  onclick="window.location.href='http://localhost:8080/account-settings.html'" class="dash-button"><u>My Account</u></button>
                 </div><br><hr><br>
-
+                <!-- Loads the pets on the Left Panel -->
                 <div id="allthepets"></div>
                 
             </div>
             <div>
                 <div style="float:left; width:30%; height:10%;">
-                    <img src="avatar.png" class="image-avatar" style="width:80%">
+                    <div id="userdefault"></div>
                 </div>
                 <div style="float: left; width:70%; position:absolute; left:35%; font-size: xx-large;">
                     <label id="sessUser"><b>User</b></label><br>
@@ -49,11 +49,13 @@
     <div class="pane-scrollable" style="position: absolute; height:100vh; left:25%; width:50%; background-color: #FFB27F;  border-left: 2px solid #af7a56;">
         
         <br><br>
+        <!-- Adds the user editing section -->
         <div id="sessUserEdit"></div>
 
         <!--This will display the pets and allow their names/images to be changed  -->
      <div id="editthepets"></div>
 
+        <!-- Will allow the user to add a new pet -->
         <div class="pane-post" style="text-align: center;">
             <label style="font-size: xx-large;">Add New Pet</label>
         </div>
