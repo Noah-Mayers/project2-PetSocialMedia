@@ -55,8 +55,7 @@
         <!--This will display the pets and allow their names/images to be changed  -->
      <div id="editthepets"></div>
 
-        <!-- Will allow the user to add a new pet -->
-        <div class="pane-post" style="text-align: center;">
+        <div class="pane-post" data-toggle="modal" data-target="#pet-popup" style="text-align: center;">
             <label style="font-size: xx-large;">Add New Pet</label>
         </div>
         <br><br>
@@ -76,6 +75,27 @@
         <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:13%">
         <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:13%">
         <img src=logo-orange.png style="width:50%;  margin-left:25%; margin-top:13%">
+    </div>
+
+
+
+    <div class="modal fade" id="pet-popup" role="dialog">
+        <div class="modal-dialog">
+            <div class="pane-modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">Add Your Pet</h2>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                    <label style="color:red; visibility: visible;">Tag Already in Use</label>
+                    <input class="modal-bar" type="text" placeholder="unique tag" style="margin-top: 0%;"><br>
+                    <input class="modal-bar" type="text" placeholder="display name">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="modal-button" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="modal-button" data-dismiss="modal" onclick="">Create</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

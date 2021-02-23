@@ -129,6 +129,19 @@ body {
     font-size: xx-large;
 }
 
+.modal-bar {
+    margin-top: 3%;
+    margin-left: 5%;
+
+    width: 90%;
+    height: 5%;
+    background-color: white;
+    border-width: 10%;
+    border-radius: 10px;
+
+    font-size: xx-large;
+}
+
 .login-bar:focus, .login-bar:active {
     border-color: #FFB27F;
     border-width: 10%;
