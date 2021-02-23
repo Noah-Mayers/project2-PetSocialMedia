@@ -1,5 +1,7 @@
 package dev.groupone.beans;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +36,21 @@ public class Comment {
 	private String body;
 	
 	private java.sql.Timestamp posted;
+	
+	public Comment() {
+		super();
+	}
+
+	public Comment(int id, Post post, User author, String body, Timestamp posted) {
+		super();
+		this.id = id;
+		this.post = post;
+		this.author = author;
+		this.body = body;
+		this.posted = posted;
+	}
+
+
 
 	public int getId() {
 		return id;
