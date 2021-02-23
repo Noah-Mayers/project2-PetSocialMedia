@@ -50,7 +50,7 @@ public class ImageUploadService {
 	
 	private void initBucket(){
 			if(this.s3client == null) {
-				this.credentials = new BasicAWSCredentials("AKIAIH45L3U5QDLVM5NQ", "aKBAKm4dYk+zheLmNlJLH8pdxqSF1avdP6Aeqo3o");
+				this.credentials = new BasicAWSCredentials("", "");
 				this.s3client = AmazonS3ClientBuilder.standard()
 						.withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(Regions.US_EAST_1)
 						.build();
