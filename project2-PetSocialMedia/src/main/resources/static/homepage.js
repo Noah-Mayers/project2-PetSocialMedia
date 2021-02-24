@@ -126,12 +126,14 @@ xhttp.onreadystatechange = function (){
         outputHtml += `<div style="display:flex; font-size: large;">
                 With: <label style="color:#FFB27F"><u>${pets}</u></label>`
         //Sets Likes
+
+
+        
         outputHtml += `<div style="text-align: right; font-size: large;">
                     <img onclick="likeunlike(${input[i-1].id})" src=logo-grey.png style="width:5%">
                     <label id="${postlike}"> ${counter} </label>
                     &emsp;
-                    <img src=comment.png style="width:5%">
-                    <label> 0 </label>
+                    <img onclick="showCommentButtonClicked(${input[i-1].id})" src=comment.png style="width:5%">
                 </div>
             </div>
         </div>
@@ -314,19 +316,40 @@ function post(){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //Getting comments and GUI code:
-
+var commentSectionPost;
+var commentList;
 
 /////////////////////////////////////////////////////////
 //Functions called when users clicks buttons (comment, close comments, and post comment So far)
 /*
 *function activated when the comment button on a post is clicked
 */
-function showCommentButtonClicked(clickedPost){
-    comments = getCommentsForPost(clickedPost.id);
+function showCommentButtonClicked(postId){
+    console.log("user clicked the show comment button with the post  Id of:");
+    console.log(postId);
+    getPostWithPostId(postId);
+    // console.log("out of the get postwith id method now the commentSectionPost is... ");
+    // console.log(commentSectionPost);
+    // beginCommentSectionSetUp();
+}
+
+function beginCommentSectionSetUp(){
+    if(commentSectionPost == null || commentSectionPost == undefined){
+        return;
+    }
+    console.log("beginning comment section setup");
+    console.log("this is the post :")
+    console.log(commentSectionPost);
+    console.log("this is the comments :")
+    console.log(commentList);
     clearCommentGUIList();
-    setUpCommentSectionHeader(clickedPost.author);
-    setUpCommentSectionBody(comments);
-    makeCommentSectionVisible();
+    console.log("making header");
+    setUpCommentSectionHeader(commentSectionPost.author);
+    console.log("making body");
+    setUpCommentSectionBody();
+    console.log("making visible");
+    //makeCommentSectionVisible();
+    console.log("done");
 }
 
 /*
@@ -335,7 +358,7 @@ function showCommentButtonClicked(clickedPost){
 function closeCommentSection(){
     clearCommentGUIList();
     let entireCommentSection = document.getElementById("commentsSection");
-    entireCommentSection.style.visibility='hidden';
+    //entireCommentSection.style.visibility='hidden';
 }
 
 /////////////////////////////////////////////////////////
@@ -350,13 +373,34 @@ function getCommentsForPost(postId){
             console.log(this.response);
             let comments = JSON.parse(this.responseText);
             console.log(comments);
-            return comments;
+            commentList = comments;
+            beginCommentSectionSetUp();
         }
         else{
             return null;
         }
     }
     xhttp.open("GET", "http://localhost:8080/comments/post/" + postId, true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send();
+}
+
+function getPostWithPostId(postId){
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("Recieved post...");
+            console.log(this.response);
+            let postGotten = JSON.parse(this.responseText);
+            console.log(postGotten);
+            commentSectionPost = postGotten;
+            getCommentsForPost(commentSectionPost.id);
+        }
+        else{
+            return null;
+        }
+    }
+    xhttp.open("GET", "http://localhost:8080/posts/" + postId, true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send();
 }
@@ -385,22 +429,29 @@ function makeCommentSectionVisible(){
 
 //Makes header that indicates the author of post 
 function setUpCommentSectionHeader(authorOfPost){
+    console.log("in set up comment section header");
+    console.log(authorOfPost);
     let usernameLable = document.getElementById("authorOfSelectedPost");
     usernameLable.innerHTML = authorOfPost.username;
     let closeButtom = document.getElementById("closeCommentsButton");
     closeButtom.addEventListener("click", closeCommentSection());
+    console.log("finished setting up header");
 }
 
 
 
 //Adds the comments to where comments are shown using the rest of the functions in the section
-function setUpCommentSectionBody(listOfComments){
+function setUpCommentSectionBody(){
+    console.log("int he setting up of the body");
+    console.log("the comment list again is... ");
+    console.log(commentList);
    let commentBodyDiv = document.getElementById("whereToAddComments");
-   if(Array.isArray(listOfComments)){
-        for (let i =listOfComments.length; i > 0; i--){
-            commentBodyDiv.appendChild(makeSingularCommentDivFor[i]);
-            let br = document.createElement('<br />');
-            commentBodyDiv.appendChild(br);
+   if(Array.isArray(commentList)){
+        for (let i =0; i < commentList.length; i++){
+            console.log("in the  iteration of i equal to " + i);
+            commentBodyDiv.appendChild(makeSingularCommentDivFor(i));
+            let x = document.createElement("BR");
+            commentBodyDiv.appendChild(x);
         }
    }
    else {
@@ -409,7 +460,10 @@ function setUpCommentSectionBody(listOfComments){
 }
 
 
-function makeSingularCommentDivFor(CommentToInject){
+function makeSingularCommentDivFor(CommentposToInject){
+    let CommentToInject = commentList[CommentposToInject];
+    console.log("in the making a single comment div for. the comment here is : ");
+    console.log(CommentToInject);
     let outterMostPaneDiv = document.createElement("div");
     outterMostPaneDiv.className = "pane-comment";
     
@@ -429,7 +483,7 @@ function makeSingularCommentHeaderDiv(authorOfClient){
 
     let commentAuthorImg = document.createElement("IMG");
     commentAuthorImg.className = "image-avatar";
-    commentAuthorImg.style.width = "width:6%";
+    commentAuthorImg.style.width = "6%"; //width:
     commentAuthorImg.src = getCommentAuthorImage(authorOfClient);
 
     let commentHeaderLabel = document.createElement("LABEL");
@@ -437,6 +491,7 @@ function makeSingularCommentHeaderDiv(authorOfClient){
     commentHeaderLabel.innerHTML = authorOfClient.username;
 
     innerCommentHeaderDiv.appendChild(commentAuthorImg);
+    
     innerCommentHeaderDiv.appendChild(commentHeaderLabel);
     return innerCommentHeaderDiv;
 
@@ -467,15 +522,27 @@ function getCommentAuthorImage(commentAuthor){
 
 //////////////////////////////////////////////////////////
 //Posting Comments code
+
+
 /*
 *Active when user clicks the button to submit the comment. 
 */
 function submitComment(){
-
+    console.log("comment button clicked!!! ");
+    bodyOfcommentToPost =  document.getElementById("commentTextArea").value;
+    document.getElementById("commentTextArea").value = "";
+    if(bodyOfcommentToPost == "" || bodyOfcommentToPost == null || bodyOfcommentToPost == undefined){
+        return;
+    }
+    saveCommentToServer(bodyOfcommentToPost);
 }
 
 
-function saveCommentToServer(comment){
+function saveCommentToServer(commentString){
+    let commentToPost = {
+        post:commentSectionPost, 
+        body:commentString
+    };
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -483,15 +550,15 @@ function saveCommentToServer(comment){
             console.log(this.response);
             let returnedComment = JSON.parse(this.responseText);
             console.log(returnedComment);
-            return returnedComment;
+            showCommentButtonClicked(commentSectionPost.id);
         }
         else{
             return null;
         }
     }
-    xhttp.open("POST", "http://localhost:8080/comments" + postId, true);
+    xhttp.open("POST", "http://localhost:8080/comments", true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
-    xhttp.send(JSON.stringify(comment));
+    xhttp.send(JSON.stringify(commentToPost));
 }
 
 function makeCommentObjectForSending(postObject, bodyOfComment){

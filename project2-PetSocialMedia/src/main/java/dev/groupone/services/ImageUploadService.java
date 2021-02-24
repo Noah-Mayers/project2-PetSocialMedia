@@ -26,8 +26,8 @@ public class ImageUploadService {
 	private  AmazonS3 s3client = null;
 	private  String bucketName = "proj2buck"; //Establishes name of our bucket
 	private AWSCredentials credentials;
-	private String accessKey = "";
-	private String secretAccesskey = "";
+	private String accessKey = "AKIAIH3CYIJEVOW4NI3A";
+	private String secretAccesskey = "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";
 	
 	
 	public String uploadFileToBucket(MultipartFile mpf, int imageId) {
