@@ -37,7 +37,7 @@
                 <div id="allthepets"></div>
                 
             </div>
-            <div>
+            <div style="display:flex">
                 <div style="float:left; width:30%; height:10%;">
                     <div id="userdefault"></div>
                 </div>
@@ -72,94 +72,15 @@
 
 
 
-    <div class="pane-narrow pane-right" style="background-color: #EEE; visibility: visible; border-left: 2px solid #af7a56; margin:0; text-align: center;">
+    <div id="commentsSection" class="pane-narrow pane-right" style="background-color: #EEE; visibility: visible; border-left: 2px solid #af7a56; margin:0; text-align: center;">
         <div style="width:100%; background-color:white; border-bottom: 1px solid #CCC; text-align:left; padding:1%">        
-            <button type="button" class="close">&times;</button>
-            Comments on post by <label>User</label>
+            <button type="button" class="close" id="closeCommentsButton">&times;</button>
+            Comments on post by <label id="authorOfSelectedPost">User</label>
         </div>
         
         <div class="pane-scrollable" style="width:100%; text-align:left; height:60vh">
-            <div>
-                <div class="pane-comment">
-                    <div class="pane-comment-header">
-                        <img src="avatar.png" class="image-avatar" style="width:6%">
-                        <label style="text-indent: 10%;">User</label>
-                    </div>
-                    <div class="pane-comment-body" style>
-                        <label style="vertical-align: center;">comment</label>
-                    </div>
-                </div><br>
-
-                <div class="pane-comment">
-                    <div class="pane-comment-header">
-                        <img src="avatar.png" class="image-avatar" style="width:6%">
-                        <label style="text-indent: 10%;">User</label>
-                    </div>
-                    <div class="pane-comment-body">
-                        <label style="vertical-align: center;">comment</label>
-                    </div>
-                </div><br>
-
-                <div class="pane-comment">
-                    <div class="pane-comment-header">
-                        <img src="avatar.png" class="image-avatar" style="width:6%">
-                        <label style="text-indent: 10%;">User</label>
-                    </div>
-                    <div class="pane-comment-body">
-                        <label style="vertical-align: center;">comment</label>
-                    </div>
-                </div><br>
-
-                <div class="pane-comment">
-                    <div class="pane-comment-header">
-                        <img src="avatar.png" class="image-avatar" style="width:6%">
-                        <label style="text-indent: 10%;">User</label>
-                    </div>
-                    <div class="pane-comment-body">
-                        <label style="vertical-align: center;">comment</label>
-                    </div>
-                </div><br>
-
-                <div class="pane-comment">
-                    <div class="pane-comment-header">
-                        <img src="avatar.png" class="image-avatar" style="width:6%">
-                        <label style="text-indent: 10%;">User</label>
-                    </div>
-                    <div class="pane-comment-body">
-                        <label style="vertical-align: center;">comment</label>
-                    </div>
-                </div><br>
-
-                <div class="pane-comment">
-                    <div class="pane-comment-header">
-                        <img src="avatar.png" class="image-avatar" style="width:6%">
-                        <label style="text-indent: 10%;">User</label>
-                    </div>
-                    <div class="pane-comment-body">
-                        <label style="vertical-align: center;">comment</label>
-                    </div>
-                </div><br>
-
-                <div class="pane-comment">
-                    <div class="pane-comment-header">
-                        <img src="avatar.png" class="image-avatar" style="width:6%">
-                        <label style="text-indent: 10%;">User</label>
-                    </div>
-                    <div class="pane-comment-body">
-                        <label style="vertical-align: center;">comment</label>
-                    </div>
-                </div><br> 
-
-                <div class="pane-comment">
-                    <div class="pane-comment-header">
-                        <img src="avatar.png" class="image-avatar" style="width:6%">
-                        <label style="text-indent: 10%;">User</label>
-                    </div>
-                    <div class="pane-comment-body">
-                        <label style="vertical-align: center;">comment</label>
-                    </div>
-                </div><br>
-
+            <div id="whereToAddComments">
+                <!--Example of what pane in here will look like 
                 <div class="pane-comment">
                     <div class="pane-comment-header">
                         <img src="avatar.png" class="image-avatar" style="width:6%">
@@ -169,6 +90,7 @@
                         <label style="vertical-align: center;">comment</label>
                     </div>
                 </div><br>
+                -->
             </div>
 
             <!-- Don't remove this, if you do the bottom comment will be behind the textarea-->
@@ -176,9 +98,9 @@
         </div>
         
         <div class="pane-bottom" style="height:25vh; border-top: 1px solid #CCC; width:25vw; background-color: #EEE;">
-            <textarea class="modal-area" placeholder="Share your thoughts!" style="width:90%; height:60%; margin-top:5%"></textarea>
+            <textarea id="commentTextArea" class="modal-area" placeholder="Share your thoughts!" style="width:90%; height:60%; margin-top:5%"></textarea>
             <div class="pane-right" style="margin-right:1%">
-                <button class="modal-button" style="font-size: medium;">comment</button>
+                <button class="modal-button" style="font-size: medium;" onclick="submitComment()" >comment</button>
             </div>
         </div>
 

@@ -242,11 +242,12 @@ function sessInfo() {
         let aname = document.getElementById("newpetname").value;
         let atag = document.getElementById("newpettag").value;
         // let abio = document.getElementById("newpetbio").value;
+        let abio = document.getElementById("newpetbio").value;
     
         let pet = {
             name : aname,
             tag : atag,
-            bio : "",
+            bio : abio,
             owner: sessionuser
         }
         let xhttp = new XMLHttpRequest();
