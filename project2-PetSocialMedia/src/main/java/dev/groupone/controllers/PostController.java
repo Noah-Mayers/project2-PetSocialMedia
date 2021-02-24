@@ -76,6 +76,7 @@ public class PostController {
 	@GetMapping(value = "/posts/{id}", produces = "application/json")
 	public Post getPost(@PathVariable("id") String id) {
 		//gets the user with the given id
+		System.out.println("in the get post method... got the string " + id);
 		return ps.getPost(Integer.parseInt(id));
 	}
 	

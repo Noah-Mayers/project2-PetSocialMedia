@@ -76,7 +76,9 @@ public class CommentController {
 	 * @return
 	 */
 	@PostMapping(value = "/comments", consumes = "application/json", produces = "application/json")
-	public Comment addCommentToPost(@PathVariable("id") int id, @RequestBody Comment newComment) {
+	public Comment addCommentToPost(@RequestBody Comment newComment) { //@PathVariable("id") int id, 
+		System.out.println("in the adding a  comment post method..");
+		System.out.println(newComment);
 		User loggedInUser = lc.getLoggedInUser();
 		newComment.setAuthor(loggedInUser);
 		if(loggedInUser.getId() == 0) {
