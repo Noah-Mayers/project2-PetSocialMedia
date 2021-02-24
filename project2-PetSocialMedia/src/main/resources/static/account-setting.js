@@ -32,7 +32,7 @@ function sessInfo() {
             picurl = sessionuser.profilePicture.url;
         }
         
-        document.getElementById("userdefault").innerHTML = `<img src="${picurl}" class="image-avatar" style="width:80%">` ;
+        document.getElementById("userdefault").innerHTML = `<img src="${picurl}" class="image-avatar" style="width:40%">` ;
 
 
             loadpets();

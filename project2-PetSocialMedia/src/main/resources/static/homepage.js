@@ -15,7 +15,7 @@ xhttp.onreadystatechange = function (){
             picurl = sessionuser.profilePicture.url;
         }
         
-        document.getElementById("userdefault").innerHTML = `<img src="${picurl}" class="image-avatar" style="width:50%">` ;
+        document.getElementById("userdefault").innerHTML = `<img src="${picurl}" class="image-avatar" style="width:40%">` ;
         loadpets();
         loadposts();
     }
